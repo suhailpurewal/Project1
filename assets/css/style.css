@@ -1,0 +1,19 @@
+#Header {
+	text-align: center;
+	border-bottom: 2px solid black;
+}
+
+#news {
+	margin-top: 5px;
+	border: 1px solid green;
+	height: 500px;
+	margin-bottom: 5px;
+}
+
+#lookup {
+	text-align: center;
+}
+
+#Footer {
+	border-top: 2px solid black;
+}
