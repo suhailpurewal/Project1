@@ -59,9 +59,9 @@ $(".submitBtn").on("click", function()
         var myCryptoHoldings = $("#myCryptoHoldings").val();
         var watchSymbol = $("#watchSymbol").val().trim();
 
-        var newStockRow = $("<tr id='stockSymbol'>");
-        var newCryptoRow = $("<tr id='cryptoSymbol'>");
-        var newWatchRow = $("<tr id='watchSymbol'>");
+        var newStockRow = $("<tr data-stockSymbol='"+stockSymbol+"'>");
+        var newCryptoRow = $("<tr data-cryptoSymbol='"+cryptoSymbol+"'>");
+        var newWatchRow = $("<tr data-watchSympbol='"+watchSymbol+"'>");
 
         var newStockSymbol = $("<td>").text(stockSymbol);
         var newStockHoldings = $("<td>").text(myStockHoldings);
