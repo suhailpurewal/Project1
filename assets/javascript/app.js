@@ -1,3 +1,28 @@
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDi-ZLob5JkZmhcd-3JOyHxGpTQkTlpjKY",
+    authDomain: "bst-project1.firebaseapp.com",
+    databaseURL: "https://bst-project1.firebaseio.com",
+    projectId: "bst-project1",
+    storageBucket: "bst-project1.appspot.com",
+    messagingSenderId: "317196564451"
+  };
+  firebase.initializeApp(config);
+  var database = firebase.database();
+  database.ref('stocks').on('child_added', function(snapshot) {
+      var myStockList = snapshot.val();
+  }, function(error)
+  {
+      console.log(error);
+  });
+
+
+
+
+
+
+
 var apiKey = "42LHI6W5OA6L5CTI";
 var ticker;
 var queryURL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+ ticker + "&interval=1min&apikey=" + apiKey
@@ -25,33 +50,7 @@ $("#submit").on("click", function() {
 
 stockSearch();
 
-
-
-$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=FB&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
-    // Create the chart
-    console.log(data);
-    var convData = parseData(data["Time Series (Daily)"]);
-    convData.sort(function(a,b){return a[0] - b[0]});
-    Highcharts.stockChart('chartSpot', {
-
-      // $.ajax({
-      //   url: queryURL,
-      //   method: "GET"
-      // }).done(function(Stock) {
-      // 	console.log(Stock);
-      // 	var stockResults = Stock.response.docs;
-      // 	console.log(stockResults);
-
-      // 	for (var i = 0; i < stockResults.length; i++) {
-      // 		var articleDiv = $("<div>");
-      // 		var headline = stockResults[i].headline.main;
-      // 		console.log("for loop running")
-      // 		articleDiv.append("<p>" + headline);
-      // 		articleDiv.text("<p>" + headline);
-      		
-      // 	}
-
-      $(".submitBtn").on("click", function()
+$(".submitBtn").on("click", function()
       {
 
         var stockSymbol = $("#stockSymbol").val().trim();
@@ -60,10 +59,9 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
         var myCryptoHoldings = $("#myCryptoHoldings").val();
         var watchSymbol = $("#watchSymbol").val().trim();
 
-        var newStockRow = $("<tr>");
-        var newCryptoRow = $("<tr>");
-        var newWatchRow = $("<tr>");
-
+        var newStockRow = $("<tr id='stockSymbol'>");
+        var newCryptoRow = $("<tr id='cryptoSymbol'>");
+        var newWatchRow = $("<tr id='watchSymbol'>");
 
         var newStockSymbol = $("<td>").text(stockSymbol);
         var newStockHoldings = $("<td>").text(myStockHoldings);
@@ -90,6 +88,32 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
         $("#watchList").append(newWatchRow);
 
       });
+
+
+
+$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=FB&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
+    // Create the chart
+    console.log(data);
+    var convData = parseData(data["Time Series (Daily)"]);
+    convData.sort(function(a,b){return a[0] - b[0]});
+    Highcharts.stockChart('chartSpot', {
+
+      // $.ajax({
+      //   url: queryURL,
+      //   method: "GET"
+      // }).done(function(Stock) {
+      // 	console.log(Stock);
+      // 	var stockResults = Stock.response.docs;
+      // 	console.log(stockResults);
+
+      // 	for (var i = 0; i < stockResults.length; i++) {
+      // 		var articleDiv = $("<div>");
+      // 		var headline = stockResults[i].headline.main;
+      // 		console.log("for loop running")
+      // 		articleDiv.append("<p>" + headline);
+      // 		articleDiv.text("<p>" + headline);
+      		
+      // 	}
 
 
       	// for (var i = 0; i < stockResults.length; i++) {
