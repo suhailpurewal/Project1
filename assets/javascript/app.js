@@ -128,27 +128,22 @@ snapshot.forEach(function(watchList) {
 
 
 
-
+// need to do clone 131-169 TWO more times for crypto and for watch list, changing some of the internal data inbetween
 $(".stocks").on("click", function() {    // need to update with on click for each individual row
   var ticker = this.id;
   console.log(ticker);
 $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
     // Create the chart
     console.log(data);
-
     var convData = parseData(data["Time Series (Daily)"]);
     convData.sort(function(a,b){return a[0] - b[0]});
     Highcharts.stockChart('chartSpot', {
-
-
         rangeSelector: {
             selected: 1
         },
-
         title: {
             text: ticker +  " Stock Price" 
         },
-
         series: [{
             name: ticker,
             data: convData,
