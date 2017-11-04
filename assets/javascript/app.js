@@ -65,7 +65,7 @@ snapshot.forEach(function(watchList) {
     tr.append($('<td class="text-center">').text(wallet.stockSymbol));
     tr.append($('<td class="text-center">').text(wallet.myStockHoldings * 100)); // need to actually link to current price via yahoo or something
     tr.append($('<td class="text-center">').text(wallet.myStockHoldings));
-
+    // $(this).addClass(wallet.stockSymbol); - trying to add class to each row with the ticker as the class.
     $("#stockTable").append(tr);
   }
 
