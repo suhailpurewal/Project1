@@ -8,23 +8,19 @@ var config = {
   };
 
 firebase.initializeApp(config);
+var database = firebase.database();
 
 $(document).ready(function(){
     $(".nav-tabs a").click(function(){
         $(this).tab('show');
        });
     });
-stockSearch();
-function stockSearch() {
-$("#submit").on("click", function() {
-  ticker = $("#companyName").val().trim()
-})
-};
 
-stockSearch();
+
 
       $(".submitBtn").on("click", function()
       {
+
 
         var stockSymbol = $("#stockSymbol").val().trim();
         var myStockHoldings = $("#myStockHoldings").val().trim();
@@ -64,7 +60,7 @@ stockSearch();
       });
 
 
-$("#watchList").on("click", function() {    // need to update with on click for each individual row
+$("#stocks").on("click", function() {    // need to update with on click for each individual row
   var ticker = "FB";
 $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
     // Create the chart
