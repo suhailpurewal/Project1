@@ -59,9 +59,9 @@ $(".submitBtn").on("click", function()
         var myCryptoHoldings = $("#myCryptoHoldings").val();
         var watchSymbol = $("#watchSymbol").val().trim();
 
-        var newStockRow = $("<tr data-stockSymbol='"+stockSymbol+"'>");
-        var newCryptoRow = $("<tr data-cryptoSymbol='"+cryptoSymbol+"'>");
-        var newWatchRow = $("<tr data-watchSympbol='"+watchSymbol+"'>");
+        var newStockRow = $('<tr>').addClass('clickRow').attr('data-stockSymbol', stockSymbol);
+        var newCryptoRow = $('<tr>').addClass('clickRow').attr('data-cryptoSymbol', cryptoSymbol);
+        var newWatchRow = $('<tr>').addClass('clickRow').attr('data-watchSympbol', watchSymbol);
 
         var newStockSymbol = $("<td>").text(stockSymbol);
         var newStockHoldings = $("<td>").text(myStockHoldings);
@@ -88,6 +88,19 @@ $(".submitBtn").on("click", function()
         $("#watchList").append(newWatchRow);
 
       });
+
+  $(".clickRow").click(function() 
+    {
+        var showChartStock = this.data-stockSymbol;
+        var showChartCrypto = this.data-cryptoSymbol;
+        var showChartWatch = this.data-watchSympbol;
+
+        console.log(showChartStock);
+
+        console.log(event);   
+    });
+
+
 
 
 
@@ -141,7 +154,7 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
             }
         }]
     });
-});
+  });
 
         $(".add-company").on("click", function(event) {
           event.preventDefault();
