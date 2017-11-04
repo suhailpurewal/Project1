@@ -17,7 +17,7 @@ $(document).ready(function(){
     });
 // FB LINK & TABLE CREATION FOR STOCKS
 database.ref("/wallet").on("value", function(snapshot) {
-$("#stockTable").empty();
+$(".stockTable").empty();
 snapshot.forEach(function(walletList) {
   makeWalletTable(walletList.val());
 });
@@ -61,12 +61,12 @@ snapshot.forEach(function(watchList) {
       });
 // function to make stock table
   function makeWalletTable(wallet){
-    var tr = $('<tr>');
-    tr.append($('<td class="text-center">').text(wallet.stockSymbol));
-    tr.append($('<td class="text-center">').text(wallet.myStockHoldings * 100)); // need to actually link to current price via yahoo or something
-    tr.append($('<td class="text-center">').text(wallet.myStockHoldings));
+    var tr = $('<tr class="text-center">');
+    tr.append($('<td class="text-center" id="' + wallet.stockSymbol + '">').text(wallet.stockSymbol));
+    tr.append($('<td class="text-center" id="' + wallet.stockSymbol + '">').text(wallet.myStockHoldings * 100)); // need to actually link to current price via yahoo or something
+    tr.append($('<td class="text-center" id="' + wallet.stockSymbol + '">').text(wallet.myStockHoldings));
     // $(this).addClass(wallet.stockSymbol); - trying to add class to each row with the ticker as the class.
-    $("#stockTable").append(tr);
+    $(".stockTable").append(tr);
   }
 
 
@@ -129,8 +129,8 @@ snapshot.forEach(function(watchList) {
 
 
 // need to do clone 131-169 TWO more times for crypto and for watch list, changing some of the internal data inbetween
-$(".stocks").on("click", function() {    // need to update with on click for each individual row
-  var ticker = this.id;
+$(".stockTable").on("click", function() {    // need to update with on click for each individual row
+  var ticker = event.target.id;
   console.log(ticker);
 $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
     // Create the chart
