@@ -35,6 +35,28 @@ var queryURL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&
       	// 	articleDiv.text("<p>" + headline);
       		
       	// }
+        $(".add-company").on("click", function(event) {
+          event.preventDefault();
+          var newCompany = $("#newcomp").val().trim();
+          console.log(newCompany);
+          displayStock(newCompany);
+        });
+
+        function displayStock(newCompany) {
+
+          var queryURL =  "https://autoc.finance.yahoo.com/autoc?query=" + newCompany + "&region=EU&lang=en-GB";
+
+            $.ajax({
+              url: queryURL,
+              method: "GET",
+              crossDomain: true,
+            }).done(function(response){
+              var results = response.data;
+              console.log(results)
+            })
+          };
+
+        
 
 
         $(function () { 
