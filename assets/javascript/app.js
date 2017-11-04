@@ -1,16 +1,14 @@
-var apiKey = "42LHI6W5OA6L5CTI";
-var ticker;
-var queryURL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+ ticker + "&interval=1min&apikey=" + apiKey
+var config = {
+    apiKey: "AIzaSyB3pRLg6RLHApVRY2lFeE_8ZCgKYL7wp94",
+    authDomain: "employeedata-a2042.firebaseapp.com",
+    databaseURL: "https://employeedata-a2042.firebaseio.com",
+    projectId: "employeedata-a2042",
+    storageBucket: "employeedata-a2042.appspot.com",
+    messagingSenderId: "91433535570"
+  };
+  
+  firebase.initializeApp(config);
 
-
-// top panel div is called #search
-// bottom panel is called #results
-
-// response.docs[x].web_url - url
-// response.docs[x].headline.main - headline url
-// response.docs[x].byline.original - author
-// response.docs[x].pub_date - posting date
-// response.docs[x].new_desk - 
 $(document).ready(function(){
     $(".nav-tabs a").click(function(){
         $(this).tab('show');
@@ -73,34 +71,6 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
     convData.sort(function(a,b){return a[0] - b[0]});
     Highcharts.stockChart('chartSpot', {
 
-      // $.ajax({
-      //   url: queryURL,
-      //   method: "GET"
-      // }).done(function(Stock) {
-      // 	console.log(Stock);
-      // 	var stockResults = Stock.response.docs;
-      // 	console.log(stockResults);
-
-      // 	for (var i = 0; i < stockResults.length; i++) {
-      // 		var articleDiv = $("<div>");
-      // 		var headline = stockResults[i].headline.main;
-      // 		console.log("for loop running")
-      // 		articleDiv.append("<p>" + headline);
-      // 		articleDiv.text("<p>" + headline);
-      		
-      // 	}
-
-
-
-
-      	// for (var i = 0; i < stockResults.length; i++) {
-      	// 	var articleDiv = $("<div>");
-      	// 	var headline = stockResults[i].headline.main;
-      	// 	console.log("for loop running")
-      	// 	articleDiv.append("<p>" + headline);
-      	// 	articleDiv.text("<p>" + headline);
-      		
-      	// }
 
         rangeSelector: {
             selected: 1
@@ -119,6 +89,19 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
         }]
     });
 });
+function parseData(data){
+  var response = [];
+
+  Object.keys(data).forEach(function(key){
+    var entry = [];
+    var dateConv = moment(key).format("x");
+    entry.push(Number.parseFloat(dateConv));
+    console.log(dateConv);
+    entry.push(Number.parseFloat(data[key]["4. close"]));
+    response.push(entry);
+    console.log(entry);
+  })
+  return response;
 
         $(".add-company").on("click", function(event) {
           event.preventDefault();
@@ -142,19 +125,7 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
           };
 
 
-function parseData(data){
-  var response = [];
 
-  Object.keys(data).forEach(function(key){
-    var entry = [];
-    var dateConv = moment(key).format("x");
-    entry.push(Number.parseFloat(dateConv));
-    console.log(dateConv);
-    entry.push(Number.parseFloat(data[key]["4. close"]));
-    response.push(entry);
-    console.log(entry);
-  })
-  return response;
 
 }
 
