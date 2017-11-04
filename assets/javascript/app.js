@@ -35,12 +35,15 @@ $(document).ready(function(){
         newStockRow.append(newStockHoldings);
         $("#stocks").append(newStockRow);
       });
+
+
+
       $("#cryptoSubmit").on("click", function() {
         var cryptoSymbol = $("#cryptoSymbol").val().trim();
-        var myCryptoHoldings = $("#myCryptoHoldings").val().trim();
-        var newCrypoto = {
+        var myCryptoHoldings = $("#myCryptoHoldings").val();
+        var newCrypto = {
           cryptoSymbol: $("#cryptoSymbol").val().trim(),
-          myCryptoHoldings: $("#myCryptoHoldings").val().trim(),
+          myCryptoHoldings: $("#myCryptoHoldings").val(),
         }
         database.ref("crypto").push(newCrypto);        
         var newCryptoSymbol = $("<td>").text(cryptoSymbol);
@@ -52,6 +55,9 @@ $(document).ready(function(){
         newCryptoRow.append(newCryptoValue);
         $("#cryptos").append(newCryptoRow);
       });
+
+
+
       $("#watchSubmit").on("click", function() {
         var watchSymbol = $("#watchSymbol").val().trim();
         var newWatchSymbol = $("<td>").text(watchSymbol);
@@ -69,9 +75,12 @@ $(document).ready(function(){
 
       });
 
+      
 
-$("#stocks").on("click", function() {    // need to update with on click for each individual row
-  var ticker = "FB";
+
+$(".stocks").on("click", function() {    // need to update with on click for each individual row
+  var ticker = this.id;
+  console.log(ticker);
 $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
     // Create the chart
     console.log(data);
