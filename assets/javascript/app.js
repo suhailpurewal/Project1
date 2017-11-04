@@ -15,22 +15,22 @@ $(document).ready(function(){
         $(this).tab('show');
        });
     });
-
-database.ref("wallet").on("value", function(snapshot) {
+// FB LINK & TABLE CREATION FOR STOCKS
+database.ref("/wallet").on("value", function(snapshot) {
 $("#stockTable").empty();
 snapshot.forEach(function(walletList) {
   makeWalletTable(walletList.val());
 });
 });
-
-database.ref("crypto").on("value", function(snapshot) {
+// FB LINK & TABLE CREATION FOR CRYPTO
+database.ref("/crypto").on("value", function(snapshot) {
 $("#cryptoTable").empty();
 snapshot.forEach(function(cryptoList) {
   makeCryptoTable(cryptoList.val());
 });
 });
-
-database.ref("watch").on("value", function(snapshot) {
+// FB LINK & TABLE CREATION FOR WATCH LIST
+database.ref("/watch").on("value", function(snapshot) {
 $("#watchTable").empty();
 snapshot.forEach(function(watchList) {
   makeWatchTable(watchList.val());
@@ -41,7 +41,7 @@ snapshot.forEach(function(watchList) {
 
 
 
-
+//CLICK LISTENER & SUBMITTING INFO TO FB FOR STOCKS
       $("#stockSubmit").on("click", function() {
         var stockSymbol = $("#stockSymbol").val().trim();
         var myStockHoldings = $("#myStockHoldings").val().trim();              
@@ -59,7 +59,7 @@ snapshot.forEach(function(watchList) {
         newStockRow.append(newStockHoldings);
         $("#stocks").append(newStockRow);
       });
-
+// function to make stock table
   function makeWalletTable(wallet){
     var tr = $('<tr>');
     tr.append($('<td class="text-center">').text(wallet.stockSymbol));
@@ -89,7 +89,7 @@ snapshot.forEach(function(watchList) {
       });
   function makeCryptoTable(crypto){
     var tr = $('<tr>');
-    tr.append($('<td class="text-center">').text(crpyto.cryptoSymbol));
+    tr.append($('<td class="text-center">').text(crypto.cryptoSymbol));
     tr.append($('<td class="text-center">').text(crypto.myCryptoHoldings));
 
     $("#cryptoTable").append(tr);
