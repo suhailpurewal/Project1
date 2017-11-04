@@ -6,8 +6,8 @@ var config = {
     storageBucket: "employeedata-a2042.appspot.com",
     messagingSenderId: "91433535570"
   };
-  
-  firebase.initializeApp(config);
+
+firebase.initializeApp(config);
 
 $(document).ready(function(){
     $(".nav-tabs a").click(function(){
@@ -22,6 +22,7 @@ $("#submit").on("click", function() {
 };
 
 stockSearch();
+
       $(".submitBtn").on("click", function()
       {
 
@@ -63,10 +64,12 @@ stockSearch();
       });
 
 
-
-$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=FB&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
+$("#watchList").on("click", function() {    // need to update with on click for each individual row
+  var ticker = "FB";
+$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
     // Create the chart
     console.log(data);
+
     var convData = parseData(data["Time Series (Daily)"]);
     convData.sort(function(a,b){return a[0] - b[0]});
     Highcharts.stockChart('chartSpot', {
@@ -88,6 +91,7 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
             }
         }]
     });
+});
 });
 function parseData(data){
   var response = [];
