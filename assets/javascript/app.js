@@ -194,9 +194,7 @@ function parseData(data){
 
 }
 
-// need to sort array before sending data to high charts - got it
-// compact works but full gives error after 200 or so items - got it - SLOW NOW
-// even after converting to UNIX date is not working correctly in highcharts. - GOT IT
+// need to use YAHOO or something to get current price of each symbol to do math in table.
 // seperate API calls for crypto and stocks - need seperate areas.
 
 
