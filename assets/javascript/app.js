@@ -63,7 +63,7 @@ snapshot.forEach(function(watchList) {
   function makeWalletTable(wallet){
     var tr = $('<tr>');
     tr.append($('<td class="text-center">').text(wallet.stockSymbol));
-    tr.append($('<td class="text-center">').text(""));
+    tr.append($('<td class="text-center">').text("value"));
     tr.append($('<td class="text-center">').text(wallet.myStockHoldings));
 
     $("#stockTable").append(tr);
@@ -92,7 +92,7 @@ snapshot.forEach(function(watchList) {
   function makeCryptoTable(crypto){
     var tr = $('<tr>');
     tr.append($('<td class="text-center">').text(crypto.cryptoSymbol));
-    tr.append($('<td class="text-center">').text(""));
+    tr.append($('<td class="text-center">').text("value"));
     tr.append($('<td class="text-center">').text(crypto.myCryptoHoldings));
 
     $("#cryptoTable").append(tr);
