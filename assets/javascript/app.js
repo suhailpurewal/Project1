@@ -69,7 +69,7 @@ snapshot.forEach(function(watchList) {
   }
 
 
-
+// click listener & submitting info to FB for Crypto
       $("#cryptoSubmit").on("click", function() {
         var cryptoSymbol = $("#cryptoSymbol").val().trim();
         var myCryptoHoldings = $("#myCryptoHoldings").val();
@@ -87,6 +87,7 @@ snapshot.forEach(function(watchList) {
         newCryptoRow.append(newCryptoValue);
         $("#cryptos").append(newCryptoRow);
       });
+// function to make crypto table
   function makeCryptoTable(crypto){
     var tr = $('<tr>');
     tr.append($('<td class="text-center">').text(crypto.cryptoSymbol));
@@ -96,7 +97,7 @@ snapshot.forEach(function(watchList) {
   }
 
 
-
+// click listener & submitting info to FB for watch list
       $("#watchSubmit").on("click", function() {
         var watchSymbol = $("#watchSymbol").val().trim();
         var newWatchSymbol = $("<td>").text(watchSymbol);
@@ -113,6 +114,7 @@ snapshot.forEach(function(watchList) {
         $("#watchList").append(newWatchRow);
 
       });
+// function to make watch list table
   function makeWatchTable(watch){
     var tr = $('<tr>');
     tr.append($('<td class="text-center">').text(watch.watchSymbol));
