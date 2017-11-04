@@ -16,6 +16,30 @@ $(document).ready(function(){
        });
     });
 
+database.ref("wallet").on("value", function(snapshot) {
+$("#stockTable").empty();
+snapshot.forEach(function(walletList) {
+  makeWalletTable(walletList.val());
+});
+});
+
+// database.ref("/crypto").on("value", function(snapshot) {
+// $("#cryptoTable").empty();
+// snapshot.forEach(function(cryptoList) {
+//   makeCryptoTable(cryptoList.val());
+// });
+// });
+
+// database.ref("/watch").on("value", function(snapshot) {
+// $("#watchTable").empty();
+// snapshot.forEach(function(watchList) {
+//   makeWatchTable(watchList.val());
+// });
+// });
+
+
+
+
 
 
       $("#stockSubmit").on("click", function() {
@@ -35,6 +59,14 @@ $(document).ready(function(){
         newStockRow.append(newStockHoldings);
         $("#stocks").append(newStockRow);
       });
+
+  function makeWalletTable(wallet){
+    var tr = $('<tr>');
+    tr.append($('<td class="text-center">').text(wallet.stockSymbol));
+    tr.append($('<td class="text-center">').text(wallet.myStockHoldings));
+
+    $("#trains").append(tr);
+  }
 
 
 
@@ -75,7 +107,7 @@ $(document).ready(function(){
 
       });
 
-      
+
 
 
 $(".stocks").on("click", function() {    // need to update with on click for each individual row
