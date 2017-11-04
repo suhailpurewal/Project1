@@ -24,33 +24,6 @@ $("#submit").on("click", function() {
 };
 
 stockSearch();
-
-
-
-$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=FB&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
-    // Create the chart
-    console.log(data);
-    var convData = parseData(data["Time Series (Daily)"]);
-    convData.sort(function(a,b){return a[0] - b[0]});
-    Highcharts.stockChart('chartSpot', {
-
-      // $.ajax({
-      //   url: queryURL,
-      //   method: "GET"
-      // }).done(function(Stock) {
-      // 	console.log(Stock);
-      // 	var stockResults = Stock.response.docs;
-      // 	console.log(stockResults);
-
-      // 	for (var i = 0; i < stockResults.length; i++) {
-      // 		var articleDiv = $("<div>");
-      // 		var headline = stockResults[i].headline.main;
-      // 		console.log("for loop running")
-      // 		articleDiv.append("<p>" + headline);
-      // 		articleDiv.text("<p>" + headline);
-      		
-      // 	}
-
       $(".submitBtn").on("click", function()
       {
 
@@ -90,6 +63,34 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
         $("#watchList").append(newWatchRow);
 
       });
+
+
+
+$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=FB&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
+    // Create the chart
+    console.log(data);
+    var convData = parseData(data["Time Series (Daily)"]);
+    convData.sort(function(a,b){return a[0] - b[0]});
+    Highcharts.stockChart('chartSpot', {
+
+      // $.ajax({
+      //   url: queryURL,
+      //   method: "GET"
+      // }).done(function(Stock) {
+      // 	console.log(Stock);
+      // 	var stockResults = Stock.response.docs;
+      // 	console.log(stockResults);
+
+      // 	for (var i = 0; i < stockResults.length; i++) {
+      // 		var articleDiv = $("<div>");
+      // 		var headline = stockResults[i].headline.main;
+      // 		console.log("for loop running")
+      // 		articleDiv.append("<p>" + headline);
+      // 		articleDiv.text("<p>" + headline);
+      		
+      // 	}
+
+
 
 
       	// for (var i = 0; i < stockResults.length; i++) {
