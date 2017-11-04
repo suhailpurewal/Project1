@@ -1,6 +1,12 @@
+body {width:1321px;
+}
+
+
+
 #Header {
 	text-align: center;
 	border-bottom: 2px solid black;
+	width:92.333333%;
 }
 
 #news {
@@ -33,4 +39,9 @@
 
 .submitBtn {
 	padding: 2px 12px;
+}
+
+#wallet {
+	width:31%;
+	margin-left:-7%;
 }
