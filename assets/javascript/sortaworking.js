@@ -3,20 +3,13 @@ var ticker;
 var queryURL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+ ticker + "&interval=1min&apikey=" + apiKey
 
 
-// top panel div is called #search
-// bottom panel is called #results
 
-// response.docs[x].web_url - url
-// response.docs[x].headline.main - headline url
-// response.docs[x].byline.original - author
-// response.docs[x].pub_date - posting date
-// response.docs[x].new_desk - 
         $(document).ready(function(){
     $(".nav-tabs a").click(function(){
         $(this).tab('show');
        });
     });
-stockSearch();
+
 function stockSearch() {
 $("#submit").on("click", function() {
   ticker = $("#companyName").val().trim()
@@ -26,8 +19,19 @@ $("#submit").on("click", function() {
 stockSearch();
 
 
+      // $.ajax({
+      //   url: queryURL,
+      //   method: "GET"
+      // })
+      // .done(function(data) {
+      // 	console.log(data);
+      // 	var stockResults = Stock.response.docs;
+      // 	console.log(stockResults);
+      		
+      // 	}
 
-$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=FB&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
+
+$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=AAPL&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
     // Create the chart
     console.log(data);
     var convData = parseData(data["Time Series (Daily)"]);
@@ -70,11 +74,6 @@ function parseData(data){
   return response;
 
 }
-
-// need to sort array before sending data to high charts - got it
-// compact works but full gives error after 200 or so items - got it - SLOW NOW
-// even after converting to UNIX date is not working correctly in highcharts. - GOT IT
-// seperate API calls for crypto and stocks - need seperate areas.
 
 
       	

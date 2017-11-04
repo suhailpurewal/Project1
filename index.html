@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/stock/highstock.js"></script>
 
 </head>
 <body>
@@ -64,8 +64,8 @@
 			<div class="row" id="lookup">
 				<h3>Look Up a Stock!</h3>
 				<form>
-					Company Name: <input type="text" name="CompanyName" value="CN">
-					<input type="submit" name="Submit">
+					Company Name: <input type="text" id="companyName" name="CompanyName" placeholder="enter ticker symbol">
+					<input type="submit" id="submit" name="Submit">
 				</form>
 				<p>Remembering all these stock symbols can be confusing.  To figure out what stock you want to look up, put the full company name in the search box and we'll try to find it for ya!</p>
 			</div>
@@ -84,5 +84,6 @@
 
 
 	<script src="assets/javascript/app.js"></script>
+	<script type="text/javascript" src="assets/javascript/moment.js"></script>
 </body>
 </html>
