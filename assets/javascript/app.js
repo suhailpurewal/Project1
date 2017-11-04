@@ -63,7 +63,7 @@ snapshot.forEach(function(watchList) {
   function makeWalletTable(wallet){
     var tr = $('<tr>');
     tr.append($('<td class="text-center">').text(wallet.stockSymbol));
-    tr.append($('<td class="text-center">').text("value"));
+    tr.append($('<td class="text-center">').text(wallet.myStockHoldings * 100)); // need to actually link to current price via yahoo or something
     tr.append($('<td class="text-center">').text(wallet.myStockHoldings));
 
     $("#stockTable").append(tr);
