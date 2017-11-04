@@ -23,19 +23,19 @@ snapshot.forEach(function(walletList) {
 });
 });
 
-// database.ref("/crypto").on("value", function(snapshot) {
-// $("#cryptoTable").empty();
-// snapshot.forEach(function(cryptoList) {
-//   makeCryptoTable(cryptoList.val());
-// });
-// });
+database.ref("crypto").on("value", function(snapshot) {
+$("#cryptoTable").empty();
+snapshot.forEach(function(cryptoList) {
+  makeCryptoTable(cryptoList.val());
+});
+});
 
-// database.ref("/watch").on("value", function(snapshot) {
-// $("#watchTable").empty();
-// snapshot.forEach(function(watchList) {
-//   makeWatchTable(watchList.val());
-// });
-// });
+database.ref("watch").on("value", function(snapshot) {
+$("#watchTable").empty();
+snapshot.forEach(function(watchList) {
+  makeWatchTable(watchList.val());
+});
+});
 
 
 
@@ -65,7 +65,7 @@ snapshot.forEach(function(walletList) {
     tr.append($('<td class="text-center">').text(wallet.stockSymbol));
     tr.append($('<td class="text-center">').text(wallet.myStockHoldings));
 
-    $("#trains").append(tr);
+    $("#stockTable").append(tr);
   }
 
 
@@ -87,6 +87,13 @@ snapshot.forEach(function(walletList) {
         newCryptoRow.append(newCryptoValue);
         $("#cryptos").append(newCryptoRow);
       });
+  function makeCryptoTable(crypto){
+    var tr = $('<tr>');
+    tr.append($('<td class="text-center">').text(crpyto.cryptoSymbol));
+    tr.append($('<td class="text-center">').text(crypto.myCryptoHoldings));
+
+    $("#cryptoTable").append(tr);
+  }
 
 
 
@@ -106,6 +113,13 @@ snapshot.forEach(function(walletList) {
         $("#watchList").append(newWatchRow);
 
       });
+  function makeWatchTable(watch){
+    var tr = $('<tr>');
+    tr.append($('<td class="text-center">').text(watch.watchSymbol));
+    // tr.append($('<td class="text-center">').text(watch.myStockHoldings));
+
+    $("#watchTable").append(tr);
+  }
 
 
 
