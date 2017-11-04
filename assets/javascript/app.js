@@ -92,7 +92,14 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
       });
 
 
-
+      	// for (var i = 0; i < stockResults.length; i++) {
+      	// 	var articleDiv = $("<div>");
+      	// 	var headline = stockResults[i].headline.main;
+      	// 	console.log("for loop running")
+      	// 	articleDiv.append("<p>" + headline);
+      	// 	articleDiv.text("<p>" + headline);
+      		
+      	// }
 
         rangeSelector: {
             selected: 1
@@ -111,6 +118,28 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
         }]
     });
 });
+
+        $(".add-company").on("click", function(event) {
+          event.preventDefault();
+          var newCompany = $("#newcomp").val().trim();
+          console.log(newCompany);
+          displayStock(newCompany);
+        });
+
+        function displayStock(newCompany) {
+
+          var queryURL =  "https://autoc.finance.yahoo.com/autoc?query=" + newCompany + "&region=EU&lang=en-GB";
+
+            $.ajax({
+              url: queryURL,
+              method: "GET",
+              crossDomain: true,
+            }).done(function(response){
+              var results = response.data;
+              console.log(results)
+            })
+          };
+
 
 function parseData(data){
   var response = [];
