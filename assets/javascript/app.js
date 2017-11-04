@@ -24,7 +24,8 @@ $("#submit").on("click", function() {
 };
 
 stockSearch();
-      $(".submitBtn").on("click", function()
+
+ $(".submitBtn").on("click", function()
       {
 
         var stockSymbol = $("#stockSymbol").val().trim();
@@ -66,6 +67,7 @@ stockSearch();
 
 
 
+
 $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=FB&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
     // Create the chart
     console.log(data);
@@ -90,8 +92,7 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
       		
       // 	}
 
-
-
+     
 
       	// for (var i = 0; i < stockResults.length; i++) {
       	// 	var articleDiv = $("<div>");
