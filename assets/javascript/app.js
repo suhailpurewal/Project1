@@ -18,43 +18,53 @@ $(document).ready(function(){
 
 
 
-      $(".submitBtn").on("click", function()
-      {
-
-
+      $("#stockSubmit").on("click", function() {
         var stockSymbol = $("#stockSymbol").val().trim();
-        var myStockHoldings = $("#myStockHoldings").val().trim();
-        var cryptoSymbol = $("#cryptoSymbol").val().trim();
-        var myCryptoHoldings = $("#myCryptoHoldings").val();
-        var watchSymbol = $("#watchSymbol").val().trim();
-
+        var myStockHoldings = $("#myStockHoldings").val().trim();              
+        var newStock = {
+          stockSymbol: $("#stockSymbol").val().trim(),
+          myStockHoldings: $("#myStockHoldings").val().trim(),
+        }
+        database.ref("wallet").push(newStock);
         var newStockRow = $("<tr>");
-        var newCryptoRow = $("<tr>");
-        var newWatchRow = $("<tr>");
-
-
         var newStockSymbol = $("<td>").text(stockSymbol);
         var newStockHoldings = $("<td>").text(myStockHoldings);
         var newStockValue = $("<td>").text("");
-        var newCryptoSymbol = $("<td>").text(cryptoSymbol);
-        var newCryptoHoldings = $("<td>").text(myCryptoHoldings);
-        var newCryptoValue = $("<td>").text("");
-        var newWatchSymbol = $("<td>").text(watchSymbol);
-        var newWatchValue = $("<td>").text("");
-        var newWatchDate = $("<td>").text("");
-
         newStockRow.append(newStockSymbol);
         newStockRow.append(newStockValue);
         newStockRow.append(newStockHoldings);
+        $("#stocks").append(newStockRow);
+      });
+      $("#cryptoSubmit").on("click", function() {
+        var cryptoSymbol = $("#cryptoSymbol").val().trim();
+        var myCryptoHoldings = $("#myCryptoHoldings").val().trim();
+        var newCrypoto = {
+          cryptoSymbol: $("#cryptoSymbol").val().trim(),
+          myCryptoHoldings: $("#myCryptoHoldings").val().trim(),
+        }
+        database.ref("crypto").push(newCrypto);        
+        var newCryptoSymbol = $("<td>").text(cryptoSymbol);
+        var newCryptoHoldings = $("<td>").text(myCryptoHoldings);
+        var newCryptoValue = $("<td>").text("");
+        var newCryptoRow = $("<tr>");        
         newCryptoRow.append(newCryptoSymbol);
         newCryptoRow.append(newCryptoHoldings);
         newCryptoRow.append(newCryptoValue);
+        $("#cryptos").append(newCryptoRow);
+      });
+      $("#watchSubmit").on("click", function() {
+        var watchSymbol = $("#watchSymbol").val().trim();
+        var newWatchSymbol = $("<td>").text(watchSymbol);
+        var newWatch = {
+          watchSymbol: $("#watchSymbol").val().trim(),
+        }
+        database.ref("watch").push(newWatch); 
+        var newWatchValue = $("<td>").text("");
+        var newWatchDate = $("<td>").text("");        
+        var newWatchRow = $("<tr>");
         newWatchRow.append(newWatchSymbol);
         newWatchRow.append(newWatchValue);
         newWatchRow.append(newWatchDate);
-
-        $("#stocks").append(newStockRow);
-        $("#cryptos").append(newCryptoRow);
         $("#watchList").append(newWatchRow);
 
       });
