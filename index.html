@@ -64,15 +64,19 @@
 			<div class="row" id="lookup">
 				<h3>Look Up a Stock!</h3>
 				<form>
-					Company Name: <input type="text" id="companyName" name="CompanyName" placeholder="enter ticker symbol">
-					<input type="submit" id="submit" name="Submit">
+
+
+
+					Company Name: <input type="text" name="CompanyName" id="newcomp" value=" ">
+					<input class="add-company" type="submit" name="Submit">
+
 				</form>
 				<p>Remembering all these stock symbols can be confusing.  To figure out what stock you want to look up, put the full company name in the search box and we'll try to find it for ya!</p>
 			</div>
 		</div>
 		<div class="col-md-3" id="news">
-			<!-- The idea here is same as the news assingment we did, just stock news.  Be cool if we could do it for the stock subreddit -->
-			<p>This is where a small, easy news tracker would scroll</p>
+			<script src='https://redditjs.com/subreddit.js' data-subreddit='stocks' data-width='375' data-height='500'></script>
+
 		</div>
 		<div class="col-md-1"></div>
 	</div>
