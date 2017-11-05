@@ -195,7 +195,7 @@ function parseData(data){
 }
 
 // need to use YAHOO or something to get current price of each symbol to do math in table.
-// seperate API calls for crypto and stocks - need seperate areas.
+// API calls for current price - and for crypto.
 
 
       	
