@@ -1,6 +1,10 @@
 body {width:1321px;
 }
 
+#container {
+	margin-left: 25px;
+    margin-right: 57px;
+}
 
 
 #Header {
@@ -10,8 +14,10 @@ body {width:1321px;
 }
 
 #news {
-	margin-top: 5px;
-	margin-bottom: 5px;
+    margin-top: 27px;
+    margin-bottom: -15px;
+    padding-left: 45px;
+
 }
 
 #lookup {
@@ -43,6 +49,7 @@ body {width:1321px;
 }
 
 #wallet {
-	width:31%;
-	margin-left:-7%;
+	width:32%;
+	margin-left:-8%;
 }
+
