@@ -27,6 +27,7 @@ body {width:1321px;
 #Footer {
 	border-top: 2px solid black;
 	width:93%;
+	margin-top: 2%;
 }
 
 .labelBars {
@@ -52,4 +53,37 @@ body {width:1321px;
 	width:32%;
 	margin-left:-8%;
 }
+
+@media screen and (max-width: 980px){
+
+	body {
+		width:980px;		
+}
+
+#wallet {
+    width: 44%;
+    margin-left: 1%;
+}
+
+#news {
+    margin-top: -90%;
+    margin-bottom: -201px;
+    padding-left: 364px;
+}
+
+#Footer {
+    width: 100%;
+    margin-top: 79%;
+    margin-bottom: 33px;
+}
+
+#red{
+    height: 275px;
+    width: 442px;
+
+}
+
+
+
+
 
