@@ -69,17 +69,86 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
           displayStock(newCompany);
         });
 
+
+
         function displayStock(newCompany) {
 
-          var queryURL =  "https://autoc.finance.yahoo.com/autoc?query=" + newCompany + "&region=EU&lang=en-GB";
+
+        var proxy = "https://cors-anywhere.herokuapp.com/"
+        var queryURL = proxy + ["https://autoc.finance.yahoo.com/autoc?query=" + newCompany + "&region=EU&lang=en-GB&x=NYSE"];
 
             $.ajax({
               url: queryURL,
               method: "GET",
               crossDomain: true,
             }).done(function(response){
-              var results = response.data;
-              console.log(results)
+              console.log(response);
+              
+              var stockarry = [];
+
+              
+              if (response.ResultSet.Result.length === 0) {
+                
+                var nope = $("<p>").text("No Stock Found");
+
+                $("#stocktickers").empty();
+                $("#stocktickers").append(nope);
+
+              }else{
+                for (i = 0; i < response.ResultSet.Result.length; i++) {
+                  if (response.ResultSet.Result[i].exchDisp === "NYSE") {
+                    stockarry.push(response.ResultSet.Result[i]);
+
+                    console.log(stockarry.length);
+
+                    var stockticker1 = stockarry[0].symbol;
+                    var stockname1 = stockarry[0].name;
+
+                    var stk1 = $("<p>").text(stockname1 + ": " + stockticker1);
+
+                    $("#instructions").addClass("hidden");
+                    $("#stocktickers").empty();
+                    $("#stocktickers").append(stk1)
+
+                  }else if (response.ResultSet.Result[i].exchDisp === "NASDAQ") {
+                    stockarry.push(response.ResultSet.Result[i]);
+
+                    console.log(stockarry.length);
+
+                    var stockticker1 = stockarry[0].symbol;
+                    var stockname1 = stockarry[0].name;
+
+                    var stk1 = $("<p>").text(stockname1 + ": " + stockticker1);
+
+                    $("#instructions").addClass("hidden");
+                    $("#stocktickers").empty();
+                    $("#stocktickers").append(stk1)
+
+                  }
+                }
+              }
+
+
+              //console.log(stockarry)
+
+
+              //var stockticker1 = stockarry[0].symbol;
+              //var stockname1 = stockarry[0].name;
+         
+
+             // var stk1 = $("<p>").text("Stock 1: " + stockname1 + ": " + stockticker1 + ", ");
+             // var stk2 = $("<p>").text("Stock 2: " + stockname2 + ": " + stockticker2 + ", ");
+             // var stk3 = $("<p>").text("Stock 3: " + stockname3 + ": " + stockticker3);
+
+              //$("#instructions").addClass("hidden");
+              //$("#stocktickers").empty();
+              //$("#stocktickers").append(stk1)//.append(stk2).append(stk3);
+
+        
+
+
+              
+  
             })
           };
 

@@ -15,3 +15,7 @@
 #Footer {
 	border-top: 2px solid black;
 }
+
+.hidden {
+	visibility: hidden;
+}
