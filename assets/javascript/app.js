@@ -67,31 +67,29 @@ snapshot.forEach(function(watchList) {
 
     $(".stockTable").append(tr);
   }
+  // function to search through FB for matching ID and delete just the one item
 function removeWallet(thisId){
   database.ref("/wallet").once('value').then(function(wallet) {
     wallet.forEach(function(stock) {
       console.log(stock.val());
       if (thisId === stock.val().stockSymbol) {
-        console.log("in statement");
+        console.log("in stock statement");
         console.log(stock.val());
         stock.ref.remove();
       }
-      //check for matching thisId
-        //if is, delete stock, break/return
     });
   });
 };
 
 
 
-
-$("btn.removeButton").on("click", function() {
-  console.log("clicked delete");
-  var remove = this.event.id;
-  $(this).closest('tr').remove();
+//function to remove row locally
+// $("btn.removeButton").on("click", function() {
+//   console.log("clicked delete");
+//   var remove = this.event.id;
+//   $(this).closest('tr').remove();
   
-})
-// removing code $('#myTableRow').remove();
+// })
 
 // click listener & submitting info to FB for Crypto
       $("#cryptoSubmit").on("click", function() {
@@ -106,14 +104,37 @@ $("btn.removeButton").on("click", function() {
       });
 // function to make crypto table
   function makeCryptoTable(crypto){
+    var thisIdc = crypto.cryptoSymbol;
     var tr = $('<tr>');
-    tr.append($('<td class="text-center">').text(crypto.cryptoSymbol));
-    tr.append($('<td class="text-center">').text("value"));
-    tr.append($('<td class="text-center">').text(crypto.myCryptoHoldings));
-    tr.append($('<button type="button" class="btn btn-default btn-sm"> <span class="glyphicon-remove" aria-hidden="true"></span></button'));
-
+    tr.append($('<td class="text-center" id="' + thisIdc + '">').text(crypto.cryptoSymbol));
+    tr.append($('<td class="text-center" id="' + thisIdc + '">').text("value"));
+    tr.append($('<td class="text-center" id="' + thisIdc + '">').text(crypto.myCryptoHoldings));
+       tr.append($('<button type="button" class="btn btn-default btn-sm removeButton"> <span class="glyphicon-remove" aria-hidden="true"></span></button')
+      .on("click", function(event) {
+        event.stopPropagation();
+        console.log("clicked delete");
+        var kThis = $(this);
+        kThis.closest('tr').remove();
+        // delete item from firebase
+        removeCrypto(thisIdc);
+      })
+    );
     $("#cryptoTable").append(tr);
   }
+// function to remove crypto from DB & table when clicking X
+function removeCrypto(thisIdc){
+  database.ref("/crypto").once('value').then(function(cryptos) {
+    cryptos.forEach(function(crypto) {
+      console.log(crypto.val());
+      console.log(thisIdc);
+      if (thisIdc === crypto.val().cryptoSymbol) {
+        console.log("in crypto statement");
+        console.log(crypto.val());
+        crypto.ref.remove();
+      }
+    });
+  });
+};
 
 
 // click listener & submitting info to FB for watch list
@@ -129,14 +150,37 @@ $("btn.removeButton").on("click", function() {
       });
 // function to make watch list table
   function makeWatchTable(watch){
+    var thisIdw = watch.watchSymbol;
     var tr = $('<tr>');
-    tr.append($('<td class="text-center">').text(watch.watchSymbol));
-    tr.append($('<button type="button" class="btn btn-default btn-sm"> <span class="glyphicon-remove" aria-hidden="true"></span></button'));
-    // tr.append($('<td class="text-center">').text(""));
-    // tr.append($('<td class="text-center">').text(watch.myStockHoldings));
+    tr.append($('<td class="text-center" id="' + thisIdw + '">').text(watch.watchSymbol));
+    tr.append($('<button type="button" class="btn btn-default btn-sm"> <span class="glyphicon-remove" aria-hidden="true"></span></button')
+    .on("click", function(event) {
+        event.stopPropagation();
+        console.log("clicked watch delete");
+        var lThis = $(this);
+        lThis.closest('tr').remove();
+        // delete item from firebase
+        removeWatch(thisIdw);
+      })
+    );
+
 
     $("#watchTable").append(tr);
   }
+  // function to remove watched items from DB and from table on X click
+function removeWatch(thisIdw){
+  database.ref("/watch").once('value').then(function(watches) {
+    watches.forEach(function(watch) {
+      console.log(watch.val());
+      console.log(thisIdw);
+      if (thisIdw === watch.val().watchSymbol) {
+        console.log("in watch statement");
+        console.log(watch.val());
+        watch.ref.remove();
+      }
+    });
+  });
+};
 
 // need to do clone 131-169 TWO more times for crypto and for watch list, changing some of the internal data inbetween
 $(".stockTable").on("click", function() {    // need to update with on click for each individual row
