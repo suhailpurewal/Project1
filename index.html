@@ -6,7 +6,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
 
 </head>
 <body>
@@ -30,117 +32,122 @@
 	   			 <li><a href="#bittracker" data-toggle="tab">Bit Tracker</a></li>
 	  			</ul>
 
-	  			<div class="tab-content">
-	    			<div id="mystocks" class="tab-pane fade in active">
-	     				<!-- <h3>My Stocks</h3>
-	      				<p>Will have input here to add stocks and quantity</p>
-	      					<ul>
-	      						<li>stock one</li>
-	      						<li>stock 2</li>
-	      						<li>stock 3</li>
-	      					</ul> -->
-	  					<div class="panel panel-default">
-	  						<div class="panel-body">
-	  							<form class="form" id="stockListForm">
-	  								<div class="form-group">
-										<label for="stockName" class="labelBars">Symbol</label>
-										<input type="text" name="stockSymbol" id="stockSymbol" class="form-control dataInputs">
-									</div>
-									<div class="form-group">
-										<label for="stockHoldings" class="labelBars">Holdings</label>
-										<input type="number" name="myHoldings" id="myStockHoldings" class="form-control dataInputs">
-									</div>
-									<button class="btn btn-default submitBtn" type="button">Submit</button>
-	  							</form>
-	  							<table class="table" id="stockList">
-									<thead>
-										<tr>
-											<th>Stock</th>
-											<th>Today's Value</th>
-											<th>Your Holdings</th>
-										</tr>
-									</thead>
-									<tbody id="stocks">
-										<tr>
-											<td>APPL</td>
-											<td>$250</td>
-											<td>$1000</td>
-										</tr>
-									</tbody>
-								</table>
-	  							
-	  						</div>
-	  						
-	  					</div>
-	    			</div>
-	    		<div id="bittracker" class="tab-pane fade">
-	      			<div class="panel panel-default">
-	  						<div class="panel-body">
-	  							<form class="form" id="crytoListForm">
-	  								<div class="form-group">
-										<label for="cryptoName" class="labelBars">Symbol</label>
-										<input type="text" name="cryptoSymbol" id="cryptoSymbol" class="form-control dataInputs">
-									</div>
-									<div class="form-group">
-										<label for="cryptoHoldings" class="labelBars">Holdings</label>
-										<input type="number" name="myHoldings" id="myCrytoHoldings" class="form-control dataInputs">
-									</div>
-									<button class="btn btn-default submitBtn" type="button">Submit</button>
-	  							</form>
-	  							<table class="table" id="cryptoList">
-									<thead>
-										<tr>
-											<th>Stock</th>
-											<th>Today's Value</th>
-											<th>Watch Date</th>
-										</tr>
-									</thead>
-									<tbody id="cyrptos">
-										<tr>
-											<td>GRMN</td>
-											<td>$50</td>
-											<td>$1000</td>
-										</tr>
-									</tbody>
-								</table>
-	  							
-	  						</div>
-	  						
-	  					</div>
-	    		</div>
-	    		<div id="stockwatchlist" class="tab-pane fade">
-	      			<div class="panel panel-default">
-	  						<div class="panel-body">
-	  							<form class="form" id="watchList">
-	  								<div class="form-group">
-										<label for="watchName" class="labelBars">Symbol</label>
-										<input type="text" name="watchSymbol" id="watchSymbol" class="form-control dataInputs">
-									</div>
-									<button class="btn btn-default submitBtn" type="button">Submit</button>
-	  							</form>
-	  							<table class="table" id="watchList">
-									<thead>
-										<tr>
-											<th>Stock</th>
-											<th>Today's Value</th>
-											<th>Your Holdings</th>
-										</tr>
-									</thead>
-									<tbody id="stocks">
-										<tr>
-											<td>APPL</td>
-											<td>$250</td>
-											<td>$1000</td>
-										</tr>
-									</tbody>
-								</table>
-	  							
-	  						</div>
-	  						
-	  					</div>
-	    		</div>
-	    		
-	  			</div>
+
+  			<div class="tab-content">
+    			<div id="mystocks" class="tab-pane fade in active">
+
+  					<div class="panel panel-default">
+  						<div class="panel-body">
+  							<form class="form" id="stockListForm">
+  								<div class="form-group">
+									<label for="stockName" class="labelBars">Symbol</label>
+									<input type="text" name="stockSymbol" id="stockSymbol" class="form-control dataInputs">
+								</div>
+								<div class="form-group">
+									<label for="stockHoldings" class="labelBars">Holdings</label>
+									<input type="number" name="myHoldings" id="myStockHoldings" class="form-control dataInputs">
+								</div>
+								<button class="btn btn-default submitBtn" id="stockSubmit" type="button">Submit</button>
+  							</form>
+  							<table class="table stockList" id="stockList">
+								<thead>
+									<tr>
+										<th>Stock</th>
+										<th>Today's Value</th>
+										<th>Your Holdings</th>
+									</tr>
+								</thead>
+								<tbody class="stockTable">
+									<tr class="stocks" id="AAPL">
+										<td>APPL</td>
+										<td>$250</td>
+										<td>$1000</td>
+									</tr>
+								</tbody>
+							</table>
+  							
+  						</div>
+  						
+  					</div>
+    			</div>
+    		<div id="bittracker" class="tab-pane fade">
+      			<div class="panel panel-default">
+  						<div class="panel-body">
+  							<form class="form" id="crytoListForm">
+  								<div class="form-group">
+									<label for="cryptoName" class="labelBars">Symbol</label>
+									<input type="text" name="cryptoSymbol" id="cryptoSymbol" class="form-control dataInputs">
+								</div>
+								<div class="form-group">
+									<label for="cryptoHoldings" class="labelBars">Holdings</label>
+									<input type="number" name="myHoldings" id="myCryptoHoldings" class="form-control dataInputs">
+								</div>
+								<button class="btn btn-default submitBtn" id="cryptoSubmit" type="button">Submit</button>
+  							</form>
+  							<table class="table" id="cryptoList">
+								<thead>
+									<tr>
+										<th>Stock</th>
+										<th>Today's Value</th>
+										<th>Watch Date</th>
+									</tr>
+								</thead>
+								<tbody id="cryptoTable">
+									<tr>
+										<td>GRMN</td>
+										<td>$50</td>
+										<td>$1000</td>
+									</tr>
+								</tbody>
+							</table>
+  							
+  						</div>
+  						
+  					</div>
+    		</div>
+    		<div id="stockwatchlist" class="tab-pane fade">
+      			<div class="panel panel-default">
+  						<div class="panel-body">
+  							<form class="form" id="watchList">
+  								<div class="form-group">
+									<label for="watchName" class="labelBars">Symbol</label>
+									<input type="text" name="watchSymbol" id="watchSymbol" class="form-control dataInputs">
+								</div>
+								<button class="btn btn-default submitBtn" id="watchSubmit" type="button">Submit</button>
+  							</form>
+  							<table class="table" id="watchList">
+								<thead>
+									<tr>
+										<th>Stock</th>
+										<th>Today's Value</th>
+										<th>Your Holdings</th>
+									</tr>
+								</thead>
+								<tbody id="watchTable">
+									<tr>
+										<td>APPL</td>
+										<td>$250</td>
+										<td>$1000</td>
+									</tr>
+								</tbody>
+							</table>
+  							
+  						</div>
+  						
+  					</div>
+    		</div>
+    		
+  			</div>
+			
+		</div>
+		<div class="col-md-4">
+			<div class="row" id="chartSpot">
+
+			</div>
+			<div class="row" id="lookup">
+				<h3>Look Up a Stock!</h3>
+				<form>
+
 				
 			</div>
 			<div class="col-md-4">
