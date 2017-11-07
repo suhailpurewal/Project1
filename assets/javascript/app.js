@@ -1,116 +1,122 @@
-var apiKey = "42LHI6W5OA6L5CTI";
-var ticker;
-var queryURL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+ ticker + "&interval=1min&apikey=" + apiKey
+var config = {
+    apiKey: "AIzaSyB3pRLg6RLHApVRY2lFeE_8ZCgKYL7wp94",
+    authDomain: "employeedata-a2042.firebaseapp.com",
+    databaseURL: "https://employeedata-a2042.firebaseio.com",
+    projectId: "employeedata-a2042",
+    storageBucket: "employeedata-a2042.appspot.com",
+    messagingSenderId: "91433535570"
+  };
 
+firebase.initializeApp(config);
+var database = firebase.database();
 
-// top panel div is called #search
-// bottom panel is called #results
-
-// response.docs[x].web_url - url
-// response.docs[x].headline.main - headline url
-// response.docs[x].byline.original - author
-// response.docs[x].pub_date - posting date
-// response.docs[x].new_desk - 
 $(document).ready(function(){
     $(".nav-tabs a").click(function(){
         $(this).tab('show');
        });
     });
-stockSearch();
-function stockSearch() {
-$("#submit").on("click", function() {
-  ticker = $("#companyName").val().trim()
-})
-};
-
-stockSearch();
-
- $(".submitBtn").on("click", function()
-      {
-
+// FB LINK & TABLE CREATION FOR STOCKS
+database.ref("/wallet").on("value", function(snapshot) {
+$(".stockTable").empty();
+snapshot.forEach(function(walletList) {
+  makeWalletTable(walletList.val());
+});
+});
+// FB LINK & TABLE CREATION FOR CRYPTO
+database.ref("/crypto").on("value", function(snapshot) {
+$("#cryptoTable").empty();
+snapshot.forEach(function(cryptoList) {
+  makeCryptoTable(cryptoList.val());
+});
+});
+// FB LINK & TABLE CREATION FOR WATCH LIST
+database.ref("/watch").on("value", function(snapshot) {
+$("#watchTable").empty();
+snapshot.forEach(function(watchList) {
+  makeWatchTable(watchList.val());
+});
+});
+//CLICK LISTENER & SUBMITTING INFO TO FB FOR STOCKS
+      $("#stockSubmit").on("click", function() {
         var stockSymbol = $("#stockSymbol").val().trim();
-        var myStockHoldings = $("#myStockHoldings").val().trim();
-        var cryptoSymbol = $("#cryptoSymbol").val().trim();
-        var myCryptoHoldings = $("#myCryptoHoldings").val();
-        var watchSymbol = $("#watchSymbol").val().trim();
-
-        var newStockRow = $("<tr>");
-        var newCryptoRow = $("<tr>");
-        var newWatchRow = $("<tr>");
-
-
-        var newStockSymbol = $("<td>").text(stockSymbol);
-        var newStockHoldings = $("<td>").text(myStockHoldings);
-        var newStockValue = $("<td>").text("");
-        var newCryptoSymbol = $("<td>").text(cryptoSymbol);
-        var newCryptoHoldings = $("<td>").text(myCryptoHoldings);
-        var newCryptoValue = $("<td>").text("");
-        var newWatchSymbol = $("<td>").text(watchSymbol);
-        var newWatchValue = $("<td>").text("");
-        var newWatchDate = $("<td>").text("");
-
-        newStockRow.append(newStockSymbol);
-        newStockRow.append(newStockValue);
-        newStockRow.append(newStockHoldings);
-        newCryptoRow.append(newCryptoSymbol);
-        newCryptoRow.append(newCryptoHoldings);
-        newCryptoRow.append(newCryptoValue);
-        newWatchRow.append(newWatchSymbol);
-        newWatchRow.append(newWatchValue);
-        newWatchRow.append(newWatchDate);
-
-        $("#stocks").append(newStockRow);
-        $("#cryptos").append(newCryptoRow);
-        $("#watchList").append(newWatchRow);
+        var myStockHoldings = $("#myStockHoldings").val().trim();              
+        var newStock = {
+          stockSymbol: $("#stockSymbol").val().trim(),
+          myStockHoldings: $("#myStockHoldings").val().trim(),
+        }
+        database.ref("wallet").push(newStock);
 
       });
+// function to make stock table
+  function makeWalletTable(wallet){
+    var tr = $('<tr class="text-center">');
+    tr.append($('<td class="text-center" id="' + wallet.stockSymbol + '">').text(wallet.stockSymbol));
+    tr.append($('<td class="text-center" id="' + wallet.stockSymbol + '">').text(wallet.myStockHoldings * 100)); // need to actually link to current price via yahoo or something
+    tr.append($('<td class="text-center" id="' + wallet.stockSymbol + '">').text(wallet.myStockHoldings));
+    // $(this).addClass(wallet.stockSymbol); - trying to add class to each row with the ticker as the class.
+    $(".stockTable").append(tr);
+  }
 
 
+// click listener & submitting info to FB for Crypto
+      $("#cryptoSubmit").on("click", function() {
+        var cryptoSymbol = $("#cryptoSymbol").val().trim();
+        var myCryptoHoldings = $("#myCryptoHoldings").val();
+        var newCrypto = {
+          cryptoSymbol: $("#cryptoSymbol").val().trim(),
+          myCryptoHoldings: $("#myCryptoHoldings").val(),
+        }
+        database.ref("crypto").push(newCrypto);        
+
+      });
+// function to make crypto table
+  function makeCryptoTable(crypto){
+    var tr = $('<tr>');
+    tr.append($('<td class="text-center">').text(crypto.cryptoSymbol));
+    tr.append($('<td class="text-center">').text("value"));
+    tr.append($('<td class="text-center">').text(crypto.myCryptoHoldings));
+
+    $("#cryptoTable").append(tr);
+  }
 
 
-$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=FB&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
+// click listener & submitting info to FB for watch list
+      $("#watchSubmit").on("click", function() {
+        var watchSymbol = $("#watchSymbol").val().trim();
+        var newWatchSymbol = $("<td>").text(watchSymbol);
+        var newWatch = {
+          watchSymbol: $("#watchSymbol").val().trim(),
+        }
+        database.ref("watch").push(newWatch); 
+
+
+      });
+// function to make watch list table
+  function makeWatchTable(watch){
+    var tr = $('<tr>');
+    tr.append($('<td class="text-center">').text(watch.watchSymbol));
+    // tr.append($('<td class="text-center">').text(""));
+    // tr.append($('<td class="text-center">').text(watch.myStockHoldings));
+
+    $("#watchTable").append(tr);
+  }
+
+// need to do clone 131-169 TWO more times for crypto and for watch list, changing some of the internal data inbetween
+$(".stockTable").on("click", function() {    // need to update with on click for each individual row
+  var ticker = event.target.id;
+  console.log(ticker);
+$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
     // Create the chart
     console.log(data);
     var convData = parseData(data["Time Series (Daily)"]);
     convData.sort(function(a,b){return a[0] - b[0]});
     Highcharts.stockChart('chartSpot', {
-
-      // $.ajax({
-      //   url: queryURL,
-      //   method: "GET"
-      // }).done(function(Stock) {
-      // 	console.log(Stock);
-      // 	var stockResults = Stock.response.docs;
-      // 	console.log(stockResults);
-
-      // 	for (var i = 0; i < stockResults.length; i++) {
-      // 		var articleDiv = $("<div>");
-      // 		var headline = stockResults[i].headline.main;
-      // 		console.log("for loop running")
-      // 		articleDiv.append("<p>" + headline);
-      // 		articleDiv.text("<p>" + headline);
-      		
-      // 	}
-
-     
-
-      	// for (var i = 0; i < stockResults.length; i++) {
-      	// 	var articleDiv = $("<div>");
-      	// 	var headline = stockResults[i].headline.main;
-      	// 	console.log("for loop running")
-      	// 	articleDiv.append("<p>" + headline);
-      	// 	articleDiv.text("<p>" + headline);
-      		
-      	// }
-
         rangeSelector: {
             selected: 1
         },
-
         title: {
             text: ticker +  " Stock Price" 
         },
-
         series: [{
             name: ticker,
             data: convData,
@@ -120,6 +126,20 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
         }]
     });
 });
+});
+function parseData(data){
+  var response = [];
+
+  Object.keys(data).forEach(function(key){
+    var entry = [];
+    var dateConv = moment(key).format("x");
+    entry.push(Number.parseFloat(dateConv));
+    console.log(dateConv);
+    entry.push(Number.parseFloat(data[key]["4. close"]));
+    response.push(entry);
+    console.log(entry);
+  })
+  return response;
 
         $(".add-company").on("click", function(event) {
           event.preventDefault();
@@ -143,26 +163,12 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
           };
 
 
-function parseData(data){
-  var response = [];
 
-  Object.keys(data).forEach(function(key){
-    var entry = [];
-    var dateConv = moment(key).format("x");
-    entry.push(Number.parseFloat(dateConv));
-    console.log(dateConv);
-    entry.push(Number.parseFloat(data[key]["4. close"]));
-    response.push(entry);
-    console.log(entry);
-  })
-  return response;
 
 }
 
-// need to sort array before sending data to high charts - got it
-// compact works but full gives error after 200 or so items - got it - SLOW NOW
-// even after converting to UNIX date is not working correctly in highcharts. - GOT IT
-// seperate API calls for crypto and stocks - need seperate areas.
+// need to use YAHOO or something to get current price of each symbol to do math in table.
+// API calls for current price - and for crypto.
 
 
-      	
+        
