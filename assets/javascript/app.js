@@ -36,11 +36,6 @@ snapshot.forEach(function(watchList) {
   makeWatchTable(watchList.val());
 });
 });
-
-
-
-
-
 //CLICK LISTENER & SUBMITTING INFO TO FB FOR STOCKS
       $("#stockSubmit").on("click", function() {
         var stockSymbol = $("#stockSymbol").val().trim();
@@ -105,8 +100,6 @@ snapshot.forEach(function(watchList) {
 
     $("#watchTable").append(tr);
   }
-
-
 
 // need to do clone 131-169 TWO more times for crypto and for watch list, changing some of the internal data inbetween
 $(".stockTable").on("click", function() {    // need to update with on click for each individual row

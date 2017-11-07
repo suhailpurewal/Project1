@@ -3,32 +3,35 @@
 <head>
 	<title>BST</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://code.highcharts.com/stock/highstock.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
 
 </head>
 <body>
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-10"  id="Header">
-			<h1 class="Jumbotron">Bit-Stock Tranker</h1>
-			<h2>An Accessable Stock Wallet</h2>
+	<div id=container>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10"  id="Header">
+				<h1 class="Jumbotron">Bit-Stock Tracker</h1>
+				<h2>An Accesible Stock Wallet</h2>
+			</div>
+			<div class="col-md-1"></div>
 		</div>
-		<div class="col-md-1"></div>
-	</div>
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-3" id="wallet">
-			 <h2>Your Wallet</h2>
-  			<p>Choose a Tab to see you're vast wealth</p>
-  			<ul class="nav nav-tabs">
-   			 <li class="active"><a href="#mystocks" data-toggle="tab">My Stocks</a></li>
-    		 <li><a href="#stockwatchlist" data-toggle="tab">Watch List</a></li>
-   			 <li><a href="#bittracker" data-toggle="tab">Bit Tacker</a></li>
-  			</ul>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" id="wallet">
+				 <h2>Your Wallet</h2>
+	  			<p>Choose a Tab to see your vast wealth</p>
+	  			<ul class="nav nav-tabs">
+	   			 <li class="active"><a href="#mystocks" data-toggle="tab">My Stocks</a></li>
+	    		 <li><a href="#stockwatchlist" data-toggle="tab">Watch List</a></li>
+	   			 <li><a href="#bittracker" data-toggle="tab">Bit Tracker</a></li>
+	  			</ul>
+
 
   			<div class="tab-content">
     			<div id="mystocks" class="tab-pane fade in active">
@@ -144,25 +147,39 @@
 			<div class="row" id="lookup">
 				<h3>Look Up a Stock!</h3>
 				<form>
+
 				
-					Company Name: <input type="text" name="CompanyName" id="newcomp" value=" ">
-					<input class="add-company" type="submit" name="Submit">
-
-				</form>
-				<p>Remembering all these stock symbols can be confusing.  To figure out what stock you want to look up, put the full company name in the search box and we'll try to find it for ya!</p>
 			</div>
-		</div>
-		<div class="col-md-3" id="news">
-			<script src='https://redditjs.com/subreddit.js' data-subreddit='stocks' data-width='375' data-height='500'></script>
+			<div class="col-md-4">
+				<div class="row" id="chartSpot">
+				<!-- Don't get too excited it's just a photo -->
+	<!-- 				<img src="assets/images/stock_chart.jpg"> -->
+				</div>
+				<div class="row" id="lookup">
+					<h3>Look Up a Stock!</h3>
+					<form>
+					
+						Company Name: <input type="text" name="CompanyName" id="newcomp" value=" ">
+						<input class="add-company" type="submit" name="Submit">
 
+					</form>
+					<p>Remembering all these stock symbols can be confusing.  To figure out what stock you want to look up, put the full company name in the search box and we'll try to find it for ya!</p>
+				</div>
+			</div>
+			<div class="col-md-3" id="news">
+				<script src='https://redditjs.com/subreddit.js' data-subreddit='stocks' data-width='294' data-height='514'></script>
+
+			</div>
+			<div class="col-md-1"></div>
 		</div>
-		<div class="col-md-1"></div>
+
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10"  id="Footer"></div>
+			<div class="col-md-1"></div>
+		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-10"  id="Footer"></div>
-		<div class="col-md-1"></div>
-	</div>
+
 
 
 	<script src="assets/javascript/app.js"></script>
