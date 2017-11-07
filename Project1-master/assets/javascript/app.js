@@ -1,28 +1,3 @@
-
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDi-ZLob5JkZmhcd-3JOyHxGpTQkTlpjKY",
-    authDomain: "bst-project1.firebaseapp.com",
-    databaseURL: "https://bst-project1.firebaseio.com",
-    projectId: "bst-project1",
-    storageBucket: "bst-project1.appspot.com",
-    messagingSenderId: "317196564451"
-  };
-  firebase.initializeApp(config);
-  var database = firebase.database();
-  database.ref('stocks').on('child_added', function(snapshot) {
-      var myStockList = snapshot.val();
-  }, function(error)
-  {
-      console.log(error);
-  });
-
-
-
-
-
-
-
 var apiKey = "42LHI6W5OA6L5CTI";
 var ticker;
 var queryURL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+ ticker + "&interval=1min&apikey=" + apiKey
@@ -50,18 +25,19 @@ $("#submit").on("click", function() {
 
 stockSearch();
 
-$(".submitBtn").on("click", function()
-
+ $(".submitBtn").on("click", function()
       {
+
         var stockSymbol = $("#stockSymbol").val().trim();
         var myStockHoldings = $("#myStockHoldings").val().trim();
         var cryptoSymbol = $("#cryptoSymbol").val().trim();
         var myCryptoHoldings = $("#myCryptoHoldings").val();
         var watchSymbol = $("#watchSymbol").val().trim();
 
-        var newStockRow = $('<tr>').addClass('clickRow').attr('data-stockSymbol', stockSymbol);
-        var newCryptoRow = $('<tr>').addClass('clickRow').attr('data-cryptoSymbol', cryptoSymbol);
-        var newWatchRow = $('<tr>').addClass('clickRow').attr('data-watchSympbol', watchSymbol);
+        var newStockRow = $("<tr>");
+        var newCryptoRow = $("<tr>");
+        var newWatchRow = $("<tr>");
+
 
         var newStockSymbol = $("<td>").text(stockSymbol);
         var newStockHoldings = $("<td>").text(myStockHoldings);
@@ -88,45 +64,6 @@ $(".submitBtn").on("click", function()
         $("#watchList").append(newWatchRow);
 
       });
-
-  $(".clickRow").click(function() 
-    {
-        var showChartStock = this.data-stockSymbol;
-        var showChartCrypto = this.data-cryptoSymbol;
-        var showChartWatch = this.data-watchSympbol;
-
-        console.log(showChartStock);
-
-        console.log(event);   
-    });
-
-
-
-
-
-$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=FB&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
-    // Create the chart
-    console.log(data);
-    var convData = parseData(data["Time Series (Daily)"]);
-    convData.sort(function(a,b){return a[0] - b[0]});
-    Highcharts.stockChart('chartSpot', {
-
-      // $.ajax({
-      //   url: queryURL,
-      //   method: "GET"
-      // }).done(function(Stock) {
-      // 	console.log(Stock);
-      // 	var stockResults = Stock.response.docs;
-      // 	console.log(stockResults);
-
-      // 	for (var i = 0; i < stockResults.length; i++) {
-      // 		var articleDiv = $("<div>");
-      // 		var headline = stockResults[i].headline.main;
-      // 		console.log("for loop running")
-      // 		articleDiv.append("<p>" + headline);
-      // 		articleDiv.text("<p>" + headline);
-      		
-      // 	}
 
 
 
@@ -182,7 +119,7 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
             }
         }]
     });
-  });
+});
 
         $(".add-company").on("click", function(event) {
           event.preventDefault();
