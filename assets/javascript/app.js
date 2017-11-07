@@ -50,14 +50,7 @@ snapshot.forEach(function(watchList) {
           myStockHoldings: $("#myStockHoldings").val().trim(),
         }
         database.ref("wallet").push(newStock);
-        // var newStockRow = $("<tr>");
-        // var newStockSymbol = $("<td>").text(stockSymbol);
-        // var newStockHoldings = $("<td>").text(myStockHoldings);
-        // var newStockValue = $("<td>").text("");
-        // newStockRow.append(newStockSymbol);
-        // newStockRow.append(newStockValue);
-        // newStockRow.append(newStockHoldings);
-        // $("#stocks").append(newStockRow);
+
       });
 // function to make stock table
   function makeWalletTable(wallet){
@@ -79,14 +72,7 @@ snapshot.forEach(function(watchList) {
           myCryptoHoldings: $("#myCryptoHoldings").val(),
         }
         database.ref("crypto").push(newCrypto);        
-        // var newCryptoSymbol = $("<td>").text(cryptoSymbol);
-        // var newCryptoHoldings = $("<td>").text(myCryptoHoldings);
-        // var newCryptoValue = $("<td>").text("");
-        // var newCryptoRow = $("<tr>");        
-        // newCryptoRow.append(newCryptoSymbol);
-        // newCryptoRow.append(newCryptoHoldings);
-        // newCryptoRow.append(newCryptoValue);
-        // $("#cryptos").append(newCryptoRow);
+
       });
 // function to make crypto table
   function makeCryptoTable(crypto){
@@ -107,13 +93,7 @@ snapshot.forEach(function(watchList) {
           watchSymbol: $("#watchSymbol").val().trim(),
         }
         database.ref("watch").push(newWatch); 
-        // var newWatchValue = $("<td>").text("");
-        // var newWatchDate = $("<td>").text("");        
-        // var newWatchRow = $("<tr>");
-        // newWatchRow.append(newWatchSymbol);
-        // newWatchRow.append(newWatchValue);
-        // newWatchRow.append(newWatchDate);
-        // $("#watchList").append(newWatchRow);
+
 
       });
 // function to make watch list table
