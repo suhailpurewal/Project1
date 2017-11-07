@@ -49,14 +49,49 @@ snapshot.forEach(function(watchList) {
       });
 // function to make stock table
   function makeWalletTable(wallet){
+    var thisId = wallet.stockSymbol;
     var tr = $('<tr class="text-center">');
-    tr.append($('<td class="text-center" id="' + wallet.stockSymbol + '">').text(wallet.stockSymbol));
-    tr.append($('<td class="text-center" id="' + wallet.stockSymbol + '">').text(wallet.myStockHoldings * 100)); // need to actually link to current price via yahoo or something
-    tr.append($('<td class="text-center" id="' + wallet.stockSymbol + '">').text(wallet.myStockHoldings));
-    // $(this).addClass(wallet.stockSymbol); - trying to add class to each row with the ticker as the class.
+    tr.append($('<td class="text-center" id="' + thisId + '">').text(wallet.stockSymbol));
+    tr.append($('<td class="text-center" id="' + thisId + '">').text(wallet.myStockHoldings * 100)); // need to actually link to current price via yahoo or something
+    tr.append($('<td class="text-center" id="' + thisId + '">').text(wallet.myStockHoldings));
+    tr.append($('<button type="button" class="btn btn-default btn-sm removeButton"> <span class="glyphicon-remove" aria-hidden="true"></span></button')
+      .on("click", function(event) {
+        event.stopPropagation();
+        console.log("clicked delete");
+        var jThis = $(this);
+        jThis.closest('tr').remove();
+        // delete item from firebase
+        removeWallet(thisId);
+      })
+    );
+
     $(".stockTable").append(tr);
   }
+function removeWallet(thisId){
+  database.ref("/wallet").once('value').then(function(wallet) {
+    wallet.forEach(function(stock) {
+      console.log(stock.val());
+      if (thisId === stock.val().stockSymbol) {
+        console.log("in statement");
+        console.log(stock.val());
+        stock.ref.remove();
+      }
+      //check for matching thisId
+        //if is, delete stock, break/return
+    });
+  });
+};
 
+
+
+
+$("btn.removeButton").on("click", function() {
+  console.log("clicked delete");
+  var remove = this.event.id;
+  $(this).closest('tr').remove();
+  
+})
+// removing code $('#myTableRow').remove();
 
 // click listener & submitting info to FB for Crypto
       $("#cryptoSubmit").on("click", function() {
@@ -75,6 +110,7 @@ snapshot.forEach(function(watchList) {
     tr.append($('<td class="text-center">').text(crypto.cryptoSymbol));
     tr.append($('<td class="text-center">').text("value"));
     tr.append($('<td class="text-center">').text(crypto.myCryptoHoldings));
+    tr.append($('<button type="button" class="btn btn-default btn-sm"> <span class="glyphicon-remove" aria-hidden="true"></span></button'));
 
     $("#cryptoTable").append(tr);
   }
@@ -95,6 +131,7 @@ snapshot.forEach(function(watchList) {
   function makeWatchTable(watch){
     var tr = $('<tr>');
     tr.append($('<td class="text-center">').text(watch.watchSymbol));
+    tr.append($('<button type="button" class="btn btn-default btn-sm"> <span class="glyphicon-remove" aria-hidden="true"></span></button'));
     // tr.append($('<td class="text-center">').text(""));
     // tr.append($('<td class="text-center">').text(watch.myStockHoldings));
 
