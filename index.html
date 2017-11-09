@@ -8,8 +8,7 @@
 	<script src="https://code.highcharts.com/stock/highstock.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
-
+	<script src="assets/javascript/dark-blue.js"></script>
 </head>
 <body>
 	<div id=container>
@@ -24,39 +23,36 @@
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-3" id="wallet">
-				 <h2>Your Wallet</h2>
-	  			<p>Choose a Tab to see your vast wealth</p>
-	  			<ul class="nav nav-tabs">
+				 <h2 id= "textColor">Your Wallet</h2>
+	  			<!--  <p id= "textColor">Choose a Tab to see your vast wealth</p> --> 
+	  			 <ul class="nav nav-tabs">
 	   			 <li class="active"><a href="#mystocks" data-toggle="tab">My Stocks</a></li>
 	    		 <li><a href="#stockwatchlist" data-toggle="tab">Watch List</a></li>
 	   			 <li><a href="#bittracker" data-toggle="tab">Bit Tracker</a></li>
-	  			</ul>
-
-
+	  			 </ul>
   			<div class="tab-content">
     			<div id="mystocks" class="tab-pane fade in active">
-
-  					<div class="panel panel-default">
-  						<div class="panel-body">
-  							<form class="form" id="stockListForm">
-  								<div class="form-group">
-									<label for="stockName" class="labelBars">Symbol</label>
-									<input type="text" name="stockSymbol" id="stockSymbol" class="form-control dataInputs">
-								</div>
-								<div class="form-group">
-									<label for="stockHoldings" class="labelBars">Holdings</label>
-									<input type="number" name="myHoldings" id="myStockHoldings" class="form-control dataInputs">
-								</div>
-								<button class="btn btn-default submitBtn" id="stockSubmit" type="button">Submit</button>
-  							</form>
-  							<table class="table stockList" id="stockList">
-								<thead>
-									<tr>
-										<th>Stock</th>
-										<th>Today's Value</th>
-										<th>Your Holdings</th>
-									</tr>
-								</thead>
+  						<div id="walletBox" class="panel panel-default">
+  							<div class="panel-body">
+  								<form class="form" id="stockListForm">
+  									<div class="form-group">
+										<label for="stockName" class="labelBars">Symbol</label>
+										<input type="text" name="stockSymbol" id="stockSymbol" class="form-control dataInputs">
+									</div>
+									<div class="form-group">
+										<label for="stockHoldings" class="labelBars">Holdings</label>
+										<input type="number" name="myHoldings" id="myStockHoldings" class="form-control dataInputs">
+									</div>
+										<button class="btn btn-default submitBtn" id="stockSubmit" type="button">Submit</button>
+  								</form>
+					  			<table class="table stockList" id="stockList">
+									<thead>
+										<tr>
+											<th>Stock</th>
+											<th>Today's Value</th>
+											<th>Your Holdings</th>
+										</tr>
+									</thead>
 								<tbody class="stockTable">
 									<tr class="stocks" id="AAPL">
 										<td>APPL</td>
@@ -64,12 +60,12 @@
 										<td>$1000</td>
 									</tr>
 								</tbody>
-							</table>
-  							
+								</table>
+  							</div>
   						</div>
-  						
-  					</div>
     			</div>
+
+
     		<div id="bittracker" class="tab-pane fade">
       			<div class="panel panel-default">
   						<div class="panel-body">
@@ -105,16 +101,18 @@
   						
   					</div>
     		</div>
+
+
     		<div id="stockwatchlist" class="tab-pane fade">
       			<div class="panel panel-default">
-  						<div class="panel-body">
-  							<form class="form" id="watchList">
-  								<div class="form-group">
-									<label for="watchName" class="labelBars">Symbol</label>
-									<input type="text" name="watchSymbol" id="watchSymbol" class="form-control dataInputs">
-								</div>
-								<button class="btn btn-default submitBtn" id="watchSubmit" type="button">Submit</button>
-  							</form>
+  					<div class="panel-body">
+  						<form class="form" id="watchList">
+  							<div class="form-group">
+								<label for="watchName" class="labelBars">Symbol</label>
+								<input type="text" name="watchSymbol" id="watchSymbol" class="form-control dataInputs">
+							</div>
+							<button class="btn btn-default submitBtn" id="watchSubmit" type="button">Submit</button>
+  						</form>
   							<table class="table" id="watchList">
 								<thead>
 									<tr>
@@ -131,65 +129,54 @@
 									</tr>
 								</tbody>
 							</table>
-  							
-  						</div>
-  						
-  					</div>
-    		</div>
-    		
+  					</div>		
+  				</div>
+    		</div>	
   			</div>
-			
-		</div>
-		<div class="col-md-4">
+			</div>
+
+			 <div class="col-md-3" id="news">
+            <script src='https://redditjs.com/subreddit.js' data-subreddit='stocks' data-width='294' data-height='551'></script>
+        	</div>
+
+			<div class="welcome">
+            	<h2 id="welcomeText">Welcome</h2>
+                <p>Click a Stock from your Wallet to generate your live graph.</p>
+            </div>
+
+            <div class="col-md-4">     
+	        <div class="row" id="lookup">
+	        	<h3>Look Up a Stock!</h3>
+		        <form> 
+		        	Company Name: <input type="text" name="CompanyName" id="newcomp" value=" ">
+		            <input class="add-company" type="submit" name="Submit">
+		        </form>
+			         <p id="textColor">Remembering all these stock symbols can be confusing.  To figure out what stock you want to look up, put the full company name in the search box and we'll try to find it for ya!
+			         </p>
+		        <div id="stocktickers"></div>
+	         </div>
+
+			<div class="col-md-4" id="lookupContainer">	
 			<div class="row" id="chartSpot">
-
-			</div>
-			<div class="row" id="lookup">
-				<h3>Look Up a Stock!</h3>
-			</div>
-			<div class="col-md-4">
-				<div class="row" id="chartSpot">
-				<!-- Don't get too excited it's just a photo -->
-	<!-- 				<img src="assets/images/stock_chart.jpg"> -->
-				</div>
-				<div class="row" id="lookup">
-					<h3>Look Up a Stock!</h3>
-					<form>
-					
-						Company Name: <input type="text" name="CompanyName" id="newcomp" value=" ">
-						<input class="add-company" type="submit" name="Submit">
+			</div>	
+			 </div>
 
 
-				</form>
-				<p id="instructions">Remembering all these stock symbols can be confusing. Choose a company name and we will search for the most common stock associated in the NYSE and NASDAQ.</p>
-
-				<div id="stocktickers"></div>
-
-				</div>
-
-			</div>
-			<div class="col-md-3" id="news">
-				<script src='https://redditjs.com/subreddit.js' data-subreddit='stocks' data-width='294' data-height='514'></script>
-
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-
-		<div class="col-md-3" id="news">
-			<script src='https://redditjs.com/subreddit.js' data-subreddit='stocks' data-width='294' data-height='514'></script>
+			
 
 
-		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-10"  id="Footer"></div>
-			<div class="col-md-1"></div>
-		</div>
-	</div>
-</div>
+	       	<div class="col-md-1"></div>
+	   		<div class="row">
+	        	<div class="col-md-1"></div>
+	        	<div class="col-md-10"  id="Footer"></div>
+	        	<div class="col-md-1"></div>
+	        		        	<p id="footertext">Copyright 2017 Spurewal, Haspencer4, Brandonjyork, Kenneth Edwards
+				</p>
+	    	</div>
 
 
 
-	<script src="assets/javascript/app.js"></script>
-	<script type="text/javascript" src="assets/javascript/moment.js"></script>
+    <script src="assets/javascript/app.js"></script>
+    <script type="text/javascript" src="assets/javascript/moment.js"></script>
 </body>
 </html>
