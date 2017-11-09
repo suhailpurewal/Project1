@@ -70,7 +70,7 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
         });
 
 
-
+        //this is for the stock ticker search function
         function displayStock(newCompany) {
 
 
@@ -91,6 +91,7 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
                 
                 var nope = $("<p>").text("No Stock Found");
 
+                $("#instructions").addClass("hidden");
                 $("#stocktickers").empty();
                 $("#stocktickers").append(nope);
 
@@ -99,7 +100,7 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
                   if (response.ResultSet.Result[i].exchDisp === "NYSE") {
                     stockarry.push(response.ResultSet.Result[i]);
 
-                    console.log(stockarry.length);
+                    console.log(stockarry);
 
                     var stockticker1 = stockarry[0].symbol;
                     var stockname1 = stockarry[0].name;
@@ -113,7 +114,7 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
                   }else if (response.ResultSet.Result[i].exchDisp === "NASDAQ") {
                     stockarry.push(response.ResultSet.Result[i]);
 
-                    console.log(stockarry.length);
+                    console.log(stockarry);
 
                     var stockticker1 = stockarry[0].symbol;
                     var stockname1 = stockarry[0].name;
@@ -127,23 +128,7 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
                   }
                 }
               }
-
-
-              //console.log(stockarry)
-
-
-              //var stockticker1 = stockarry[0].symbol;
-              //var stockname1 = stockarry[0].name;
-         
-
-             // var stk1 = $("<p>").text("Stock 1: " + stockname1 + ": " + stockticker1 + ", ");
-             // var stk2 = $("<p>").text("Stock 2: " + stockname2 + ": " + stockticker2 + ", ");
-             // var stk3 = $("<p>").text("Stock 3: " + stockname3 + ": " + stockticker3);
-
-              //$("#instructions").addClass("hidden");
-              //$("#stocktickers").empty();
-              //$("#stocktickers").append(stk1)//.append(stk2).append(stk3);
-
+              //stock ticker search function ends
         
 
 
