@@ -26,6 +26,13 @@ body {width:1321px;
 
 #Footer {
 	border-top: 2px solid black;
+
+}
+
+.hidden {
+	visibility: hidden;
+}
+// don't know yet
 	width:93%;
 	margin-top: 2%;
 }
@@ -82,8 +89,4 @@ body {width:1321px;
     width: 442px;
 
 }
-
-
-
-
 

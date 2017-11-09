@@ -159,9 +159,14 @@
 						Company Name: <input type="text" name="CompanyName" id="newcomp" value=" ">
 						<input class="add-company" type="submit" name="Submit">
 
-					</form>
-					<p>Remembering all these stock symbols can be confusing.  To figure out what stock you want to look up, put the full company name in the search box and we'll try to find it for ya!</p>
+
+				</form>
+				<p id="instructions">Remembering all these stock symbols can be confusing. Choose a company name and we will search for the most common stock associated in the NYSE and NASDAQ.</p>
+
+				<div id="stocktickers"></div>
+
 				</div>
+
 			</div>
 			<div class="col-md-3" id="news">
 				<script src='https://redditjs.com/subreddit.js' data-subreddit='stocks' data-width='294' data-height='514'></script>
@@ -169,6 +174,10 @@
 			</div>
 			<div class="col-md-1"></div>
 		</div>
+
+		<div class="col-md-3" id="news">
+			<script src='https://redditjs.com/subreddit.js' data-subreddit='stocks' data-width='294' data-height='514'></script>
+
 
 		<div class="row">
 			<div class="col-md-1"></div>
