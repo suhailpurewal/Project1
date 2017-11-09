@@ -1,11 +1,23 @@
+body {width:1321px;
+}
+
+#container {
+	margin-left: 25px;
+    margin-right: 57px;
+}
+
+
 #Header {
 	text-align: center;
 	border-bottom: 2px solid black;
+	width:92.333333%;
 }
 
 #news {
-	margin-top: 5px;
-	margin-bottom: 5px;
+    margin-top: -99%;
+    margin-bottom: -15px;
+    padding-left: 115%;
+
 }
 
 #lookup {
@@ -14,8 +26,67 @@
 
 #Footer {
 	border-top: 2px solid black;
+
 }
 
 .hidden {
 	visibility: hidden;
 }
+// don't know yet
+	width:93%;
+	margin-top: 2%;
+}
+
+.labelBars {
+	font-weight: 500;
+	float: left;
+	margin-right: 10px;
+	margin-top: 5px;
+}
+
+.dataInputs {
+	width: 18%;
+	float: left;
+	margin-right: 10px;
+	height: 25px;
+	padding: 6px;
+}
+
+.submitBtn {
+	padding: 2px 12px;
+}
+
+#wallet {
+	width:32%;
+	margin-left:-8%;
+}
+
+@media screen and (max-width: 980px){
+
+	body {
+		width:980px;		
+}
+
+#wallet {
+    width: 44%;
+    margin-left: 1%;
+}
+
+#news {
+    margin-top: -90%;
+    margin-bottom: -201px;
+    padding-left: 364px;
+}
+
+#Footer {
+    width: 100%;
+    margin-top: 79%;
+    margin-bottom: 33px;
+}
+
+#red{
+    height: 275px;
+    width: 442px;
+
+}
+
