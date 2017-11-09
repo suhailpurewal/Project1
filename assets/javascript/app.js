@@ -140,7 +140,7 @@ function removeWallet(thisId){
 
     var tr = $('<tr>');
     tr.append($('<td class="text-center" id="' + thisIdc + '">').text(crypto.cryptoSymbol));
-    tr.append($('<td class="text-center" id="' + thisIdc + '">').text("$" + lastPrice + " USD"));
+    tr.append($('<td class="text-center" id="' + thisIdc + '">').text("$" + lastPrice ));
     tr.append($('<td class="text-center" id="' + thisIdc + '">').text(crypto.myCryptoHoldings));
        tr.append($('<button type="button" class="btn btn-default btn-sm removeButton"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button')
       .on("click", function(event) {
