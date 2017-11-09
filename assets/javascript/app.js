@@ -252,4 +252,4 @@ function parseData(data){
 // API calls for current price - and for crypto.
 
 
-      	
+        
