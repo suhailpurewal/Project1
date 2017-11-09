@@ -183,7 +183,7 @@ function removeWatch(thisIdw){
 };
 
 // need to do clone 131-169 TWO more times for crypto and for watch list, changing some of the internal data inbetween
-$(".stockTable").on("click", function() {    // need to update with on click for each individual row
+$(".stockTable").on("click", function() {
   var ticker = event.target.id;
   console.log(ticker);
 $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
@@ -208,6 +208,57 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
     });
 });
 });
+// watch table click event
+$(".watchTable").on("click", function() {
+  var ticker = event.target.id;
+  console.log(ticker);
+$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
+    // Create the chart
+    console.log(data);
+    var convData = parseData(data["Time Series (Daily)"]);
+    convData.sort(function(a,b){return a[0] - b[0]});
+    Highcharts.stockChart('chartSpot', {
+        rangeSelector: {
+            selected: 1
+        },
+        title: {
+            text: ticker +  " Stock Price" 
+        },
+        series: [{
+            name: ticker,
+            data: convData,
+            tooltip: {
+                valueDecimals: 2
+            }
+        }]
+    });
+});
+});
+$(".cryptoTable").on("click", function() {
+  var crypto = event.target.id;
+  console.log(crypto);
+$.getJSON('https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=' + crypto + '&market=CNY&apikey=42LHI6W5OA6L5CTI', function (data) {
+    // Create the chart
+    console.log(data);
+    var convDataCrypto = parseCrypto(data["Time Series (Digital Currency Daily)"]);
+    convDataCrypto.sort(function(a,b){return a[0] - b[0]});
+    Highcharts.stockChart('chartSpot', {
+        rangeSelector: {
+            selected: 1
+        },
+        title: {
+            text: crypto +  " Price in USD" 
+        },
+        series: [{
+            name: crypto,
+            data: convDataCrypto,
+            tooltip: {
+                valueDecimals: 2
+            }
+        }]
+    });
+});
+});
 function parseData(data){
   var response = [];
 
@@ -221,6 +272,24 @@ function parseData(data){
     console.log(entry);
   })
   return response;
+}
+
+function parseCrypto(data){
+  var response = [];
+
+  Object.keys(data).forEach(function(key){
+    var entry = [];
+    var dateConv = moment(key).format("x");
+    entry.push(Number.parseFloat(dateConv));
+    console.log(dateConv);
+    entry.push(Number.parseFloat(data[key]["4b. close (USD)"]));
+    response.push(entry);
+    console.log(entry);
+  })
+  return response;
+}
+
+  // return response;
 
         $(".add-company").on("click", function(event) {
           event.preventDefault();
@@ -243,10 +312,6 @@ function parseData(data){
             })
           };
 
-
-
-
-}
 
 // need to use YAHOO or something to get current price of each symbol to do math in table.
 // API calls for current price - and for crypto.
