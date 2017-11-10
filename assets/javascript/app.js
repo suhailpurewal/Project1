@@ -54,7 +54,7 @@ snapshot.forEach(function(watchList) {
     tr.append($('<td class="text-center" id="' + thisId + '">').text(wallet.stockSymbol));
     tr.append($('<td class="text-center" id="' + thisId + '">').text(wallet.myStockHoldings * 100)); // need to actually link to current price via yahoo or something
     tr.append($('<td class="text-center" id="' + thisId + '">').text(wallet.myStockHoldings));
-    tr.append($('<button type="button" class="btn btn-default btn-sm removeButton"> <span class="glyphicon-remove" aria-hidden="true"></span></button')
+    tr.append($('<button type="button" class="btn btn-default btn-sm removeButton"> <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button')
       .on("click", function(event) {
         event.stopPropagation();
         console.log("clicked delete");
@@ -109,7 +109,7 @@ function removeWallet(thisId){
     tr.append($('<td class="text-center" id="' + thisIdc + '">').text(crypto.cryptoSymbol));
     tr.append($('<td class="text-center" id="' + thisIdc + '">').text("value"));
     tr.append($('<td class="text-center" id="' + thisIdc + '">').text(crypto.myCryptoHoldings));
-       tr.append($('<button type="button" class="btn btn-default btn-sm removeButton"> <span class="glyphicon-remove" aria-hidden="true"></span></button')
+       tr.append($('<button type="button" class="btn btn-default btn-sm removeButton"> <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button')
       .on("click", function(event) {
         event.stopPropagation();
         console.log("clicked delete");
@@ -153,7 +153,7 @@ function removeCrypto(thisIdc){
     var thisIdw = watch.watchSymbol;
     var tr = $('<tr>');
     tr.append($('<td class="text-center" id="' + thisIdw + '">').text(watch.watchSymbol));
-    tr.append($('<button type="button" class="btn btn-default btn-sm"> <span class="glyphicon-remove" aria-hidden="true"></span></button')
+    tr.append($('<button type="button" class="btn btn-default btn-sm"> <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button')
     .on("click", function(event) {
         event.stopPropagation();
         console.log("clicked watch delete");
@@ -296,6 +296,7 @@ function parseData(data){
   
             })
           };
+
 
 
 

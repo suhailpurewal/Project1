@@ -1,92 +1,148 @@
-body {width:1321px;
+body {
+    width:1321px;
+    background-image: url("../images/background.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color:#000;
 }
-
 #container {
-	margin-left: 25px;
+    margin-left: 25px;
     margin-right: 57px;
 }
-
-
 #Header {
-	text-align: center;
-	border-bottom: 2px solid black;
-	width:92.333333%;
+    text-align: center;
+    border-bottom: 2px solid black;
+    width:92.333333%;
+}
+#news {
+    float: right;
+    margin-top: 2%;
+    margin-right: 7%;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+#lookupContainer{
+    width: 36%;
+    margin-left: 4px;
+    margin-top: 187px;
+    /*margin-top: 83px;*/
 }
 
-#news {
-    margin-top: -99%;
-    margin-bottom: -15px;
-    padding-left: 115%;
+.welcome {
+	background-color: rgba(158, 158, 158, 0.73);
+	border: 2px solid black;
+	color: yellow;
+	text-align: center;
 
 }
 
 #lookup {
-	text-align: center;
+    text-align: center;
+    width: 386%;
+    background-color: rgba(158, 158, 158, 0.73);
+    margin-top: 5px;
+    border: 2px solid black;
+    color: #FFD700;
+}
+
+#lookup h3 {
+	color: #FFA500;
+	font-weight: bold;
+}
+
+.add-company {
+	color: black;
 }
 
 #Footer {
-	border-top: 2px solid black;
-
+    border-top: 2px solid black;
+    width: 1171px;
+    margin-top: 49%;
+    margin-left: -83%;
 }
-
-.hidden {
-	visibility: hidden;
-}
-// don't know yet
-	width:93%;
-	margin-top: 2%;
-}
-
 .labelBars {
-	font-weight: 500;
-	float: left;
-	margin-right: 10px;
-	margin-top: 5px;
+    font-weight: 500;
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
 }
-
 .dataInputs {
-	width: 18%;
-	float: left;
-	margin-right: 10px;
-	height: 25px;
-	padding: 6px;
+    width: 18%;
+    float: left;
+    margin-right: 10px;
+    height: 25px;
+    padding: 6px;
 }
-
 .submitBtn {
-	padding: 2px 12px;
+    padding: 2px 12px;
 }
-
 #wallet {
-	width:32%;
-	margin-left:-8%;
+    width:32%;
+    margin-left:-9%;
 }
-
+.hidden {
+    visibility: hidden;
+}
+.highcharts-container {
+    margin-top:-36%;
+}
+#walletBox{
+    background-color: rgba(158, 158, 158, 0.73);
+}
+.panel{
+    color: #0000cd;
+     text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
+    border: 1px solid #000;
+    background-color: rgba(158, 158, 158, 0.73);
+    border-bottom-color: transparent;
+}
+.form-control{
+    background-color:rgba(252, 248, 248, 0.79);
+    border-color: #000;
+}
+.btn { 
+    background-color: rgba(252, 248, 248, 0.79);
+    border-color: #000;
+}
+.nav-tabs {
+    border-bottom: 0px;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #0000cd;
+     text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
+    border: 1px solid #000;
+    background-color: rgba(158, 158, 158, 0.73);
+    border-bottom-color: transparent;
+}
+.stockTable{
+     text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
+    
+}
 @media screen and (max-width: 980px){
-
-	body {
-		width:980px;		
+    body {
+        width:980px;        
 }
-
 #wallet {
     width: 44%;
     margin-left: 1%;
 }
-
 #news {
-    margin-top: -90%;
-    margin-bottom: -201px;
-    padding-left: 364px;
+    margin-top: -200%;
+    padding-left: 70%;
 }
-
 #Footer {
     width: 100%;
     margin-top: 79%;
     margin-bottom: 33px;
 }
-
 #red{
     height: 275px;
     width: 442px;
+}
 
+.nav nav-tabs {
+	color: yellow;
 }
 
