@@ -9,6 +9,11 @@ var config = {
 
 firebase.initializeApp(config);
 var database = firebase.database();
+var lastSpot;
+var lastPrice;
+var lastPriceInt;
+var priceHolder;
+var lastPriceB;
 
 $(document).ready(function(){
     $(".nav-tabs a").click(function(){
@@ -50,11 +55,26 @@ snapshot.forEach(function(watchList) {
 // function to make stock table
   function makeWalletTable(wallet){
     var thisId = wallet.stockSymbol;
+    var lastprice;
+    // var thisHolding = parseInt(wallet.myStockHoldings);
+    $.getJSON("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + thisId + "&interval=1min&apikey=42LHI6W5OA6L5CTI", function (data) { 
+  
+      lastSpot = data["Time Series (1min)"];
+      // lastRow = lastSpot.pop();
+      // // lastPrice = lastRow["3"];
+      // console.log(lastSpot);
+    var keys = Object.keys(lastSpot);
+    lastPrice = parseFloat(lastSpot[keys[0]]["4. close"]).toFixed(2);
+
+
+
     var tr = $('<tr class="text-center">');
+    priceHolder = parseFloat(wallet.myStockHoldings).toFixed(2);
+    console.log(priceHolder)
     tr.append($('<td class="text-center" id="' + thisId + '">').text(wallet.stockSymbol));
-    tr.append($('<td class="text-center" id="' + thisId + '">').text(wallet.myStockHoldings * 100)); // need to actually link to current price via yahoo or something
+    tr.append($('<td class="text-center" id="' + thisId + '">').text("$" + lastPrice));
     tr.append($('<td class="text-center" id="' + thisId + '">').text(wallet.myStockHoldings));
-    tr.append($('<button type="button" class="btn btn-default btn-sm removeButton"> <span class="glyphicon-remove" aria-hidden="true"></span></button')
+    tr.append($('<button type="button" class="btn btn-default btn-sm removeButton"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button')
       .on("click", function(event) {
         event.stopPropagation();
         console.log("clicked delete");
@@ -66,7 +86,8 @@ snapshot.forEach(function(watchList) {
     );
 
     $(".stockTable").append(tr);
-  }
+  })
+    };
   // function to search through FB for matching ID and delete just the one item
 function removeWallet(thisId){
   database.ref("/wallet").once('value').then(function(wallet) {
@@ -105,11 +126,23 @@ function removeWallet(thisId){
 // function to make crypto table
   function makeCryptoTable(crypto){
     var thisIdc = crypto.cryptoSymbol;
+        // var thisHolding = parseInt(wallet.myStockHoldings);
+    $.getJSON("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_INTRADAY&symbol=" + thisIdc + "&market=CNY&apikey=42LHI6W5OA6L5CTI", function (data) { 
+      console.log(data);
+  
+      lastSpot = data["Time Series (Digital Currency Intraday)"];
+      // lastRow = lastSpot.pop();
+      // // lastPrice = lastRow["3"];
+      // console.log(lastSpot);
+    var keys = Object.keys(lastSpot);
+    lastPrice = parseFloat(lastSpot[keys[0]]["1b. price (USD)"]).toFixed(2);
+    console.log(lastPrice);
+
     var tr = $('<tr>');
     tr.append($('<td class="text-center" id="' + thisIdc + '">').text(crypto.cryptoSymbol));
-    tr.append($('<td class="text-center" id="' + thisIdc + '">').text("value"));
+    tr.append($('<td class="text-center" id="' + thisIdc + '">').text("$" + lastPrice ));
     tr.append($('<td class="text-center" id="' + thisIdc + '">').text(crypto.myCryptoHoldings));
-       tr.append($('<button type="button" class="btn btn-default btn-sm removeButton"> <span class="glyphicon-remove" aria-hidden="true"></span></button')
+       tr.append($('<button type="button" class="btn btn-default btn-sm removeButton"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button')
       .on("click", function(event) {
         event.stopPropagation();
         console.log("clicked delete");
@@ -120,7 +153,8 @@ function removeWallet(thisId){
       })
     );
     $("#cryptoTable").append(tr);
-  }
+  })
+  };
 // function to remove crypto from DB & table when clicking X
 function removeCrypto(thisIdc){
   database.ref("/crypto").once('value').then(function(cryptos) {
@@ -151,9 +185,18 @@ function removeCrypto(thisIdc){
 // function to make watch list table
   function makeWatchTable(watch){
     var thisIdw = watch.watchSymbol;
+    $.getJSON("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + thisIdw + "&interval=1min&apikey=42LHI6W5OA6L5CTI", function (data) { 
+  
+      lastSpot = data["Time Series (1min)"];
+      // lastRow = lastSpot.pop();
+      // // lastPrice = lastRow["3"];
+      // console.log(lastSpot);
+    var keys = Object.keys(lastSpot);
+    lastPrice = parseFloat(lastSpot[keys[0]]["4. close"]).toFixed(2);
     var tr = $('<tr>');
     tr.append($('<td class="text-center" id="' + thisIdw + '">').text(watch.watchSymbol));
-    tr.append($('<button type="button" class="btn btn-default btn-sm"> <span class="glyphicon-remove" aria-hidden="true"></span></button')
+    tr.append($('<td class="text-center" id="' + thisIdw + '">').text("$" + lastPrice));
+    tr.append($('<button type="button" class="btn btn-default btn-sm"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button')
     .on("click", function(event) {
         event.stopPropagation();
         console.log("clicked watch delete");
@@ -166,7 +209,8 @@ function removeCrypto(thisIdc){
 
 
     $("#watchTable").append(tr);
-  }
+  })
+  };
   // function to remove watched items from DB and from table on X click
 function removeWatch(thisIdw){
   database.ref("/watch").once('value').then(function(watches) {
@@ -183,7 +227,7 @@ function removeWatch(thisIdw){
 };
 
 // need to do clone 131-169 TWO more times for crypto and for watch list, changing some of the internal data inbetween
-$(".stockTable").on("click", function() {    // need to update with on click for each individual row
+$(".stockTable").on("click", function() {
   var ticker = event.target.id;
   console.log(ticker);
 $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
@@ -208,6 +252,57 @@ $.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED
     });
 });
 });
+// watch table click event
+$(".watchTable").on("click", function() {
+  var ticker = event.target.id;
+  console.log(ticker);
+$.getJSON('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&outputsize=full&apikey=42LHI6W5OA6L5CTI', function (data) {
+    // Create the chart
+    console.log(data);
+    var convData = parseData(data["Time Series (Daily)"]);
+    convData.sort(function(a,b){return a[0] - b[0]});
+    Highcharts.stockChart('chartSpot', {
+        rangeSelector: {
+            selected: 1
+        },
+        title: {
+            text: ticker +  " Stock Price" 
+        },
+        series: [{
+            name: ticker,
+            data: convData,
+            tooltip: {
+                valueDecimals: 2
+            }
+        }]
+    });
+});
+});
+$(".cryptoTable").on("click", function() {
+  var crypto = event.target.id;
+  console.log(crypto);
+$.getJSON('https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=' + crypto + '&market=CNY&apikey=42LHI6W5OA6L5CTI', function (data) {
+    // Create the chart
+    console.log(data);
+    var convDataCrypto = parseCrypto(data["Time Series (Digital Currency Daily)"]);
+    convDataCrypto.sort(function(a,b){return a[0] - b[0]});
+    Highcharts.stockChart('chartSpot', {
+        rangeSelector: {
+            selected: 1
+        },
+        title: {
+            text: crypto +  " Price in USD" 
+        },
+        series: [{
+            name: crypto,
+            data: convDataCrypto,
+            tooltip: {
+                valueDecimals: 2
+            }
+        }]
+    });
+});
+});
 function parseData(data){
   var response = [];
 
@@ -221,6 +316,24 @@ function parseData(data){
     console.log(entry);
   })
   return response;
+}
+
+function parseCrypto(data){
+  var response = [];
+
+  Object.keys(data).forEach(function(key){
+    var entry = [];
+    var dateConv = moment(key).format("x");
+    entry.push(Number.parseFloat(dateConv));
+    console.log(dateConv);
+    entry.push(Number.parseFloat(data[key]["4b. close (USD)"]));
+    response.push(entry);
+    console.log(entry);
+  })
+  return response;
+}
+
+  // return response;
 
         $(".add-company").on("click", function(event) {
           event.preventDefault();
@@ -297,10 +410,6 @@ function parseData(data){
             })
           };
 
-
-
-
-}
 
 // need to use YAHOO or something to get current price of each symbol to do math in table.
 // API calls for current price - and for crypto.
