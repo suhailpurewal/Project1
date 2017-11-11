@@ -2,4 +2,4 @@
 Suheil Purewal,
 Harry Spencer,
 Brandon York,
-Kenneth Echo,
+Kenneth Echo
