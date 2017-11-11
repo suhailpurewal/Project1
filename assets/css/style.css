@@ -7,7 +7,9 @@ body {
 }
 
 .Jumbotron {
-	font-size:62px;
+    font-size: 62px;
+    margin-bottom: -28px;
+    margin-top: -6px;
 }
 
 #container {
@@ -17,11 +19,12 @@ body {
 
 
 #Header {
-	text-align: center;
-	border-bottom: 3px solid black;
-	width:92.333333%;
-	color: #f7e33a;
-	text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
+    text-align: center;
+    border-bottom: 3px solid black;
+    width: 92.333333%;
+    color: #f7e33a;
+    text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
+    height: 92px;
 }
 
 
@@ -44,21 +47,22 @@ body {
 #lookupContainer {
     width: 116%;
     margin-left: -11px;
-    margin-top: -289px;
+    margin-top: 33px;
 }
 
 #lookup {
     text-align: center;
     width: 96%;
     background-color: rgba(65, 64, 64, 0.61);
-    margin-top: 299px;
+    margin-top: 297px;
     margin-left: -406px;
     border: 1px solid black;
     color: #f7e33a;
     text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
+    float: left;
 }
 
-#Footer {
+#Footer {clear:both;
     border-top: 3px solid #000000;
     width: 1162px;
     margin-left: -92%;
@@ -70,7 +74,7 @@ body {
     text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
     text-align:center;
     float:left;
-    width: 472px;
+    width: 492px;
 
 }
 
@@ -103,7 +107,7 @@ body {
 }
 
 .highcharts-container {
-	margin-top:-36%;
+	margin-top:-3%;
 }
 
 #walletBox{
@@ -173,8 +177,12 @@ body {
 }
 
 a{
-	color: #2d9af1;
+	color:#70bcf9;
 	text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
+}
+
+#newcomp{
+    color:#000000;
 }
 
 @media screen and (max-width: 980px){
