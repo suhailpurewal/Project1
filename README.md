@@ -1,5 +1,2 @@
-# Project1
-Suheil Purewal,
-Harry Spencer,
-Brandon York,
-Kenneth Echo
+# Crypto & Stock Tracker
+Utilizing High Charts and Yahoo Finance / Google Finance API
